@@ -104,9 +104,10 @@ namespace CppNet2::System
 		virtual Int32 CompareTo(const Int32& other) const override;
 		virtual Int32 CompareTo(const Object& other) const override;
 		virtual Boolean Equals(const Int32& other) const override;
+		virtual Boolean Equals(const Object& other) const override;
 
 	private:
-		std::int32_t value_ = 0;
+		std::int32_t m_Value = 0;
 
 	public:
 		static const Int32 MaxValue;

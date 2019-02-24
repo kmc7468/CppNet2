@@ -7,84 +7,124 @@
 namespace CppNet2::System
 {
 	Boolean::Boolean(bool boolean) noexcept
-		: value_(boolean)
+		: m_Value(boolean)
 	{}
 	Boolean::Boolean(const Boolean& boolean) noexcept
-		: value_(boolean.value_)
+		: m_Value(boolean.m_Value)
 	{}
 
+	Boolean& Boolean::operator=(bool boolean) noexcept
+	{
+		return m_Value = boolean, *this;
+	}
 	Boolean& Boolean::operator=(const Boolean& boolean) noexcept
 	{
-		return value_ = boolean.value_, *this;
+		return m_Value = boolean.m_Value, *this;
 	}
 	Boolean operator==(bool lhs, const Boolean& rhs) noexcept
 	{
-		return lhs == rhs.value_;
+		return lhs == rhs.m_Value;
 	}
 	Boolean operator==(const Boolean& lhs, bool rhs) noexcept
 	{
-		return lhs.value_ == rhs;
+		return lhs.m_Value == rhs;
 	}
 	Boolean operator==(const Boolean& lhs, const Boolean& rhs) noexcept
 	{
-		return lhs.value_ == rhs.value_;
+		return lhs.m_Value == rhs.m_Value;
 	}
 	Boolean operator!=(bool lhs, const Boolean& rhs) noexcept
 	{
-		return lhs != rhs.value_;
+		return lhs != rhs.m_Value;
 	}
 	Boolean operator!=(const Boolean& lhs, bool rhs) noexcept
 	{
-		return lhs.value_ != rhs;
+		return lhs.m_Value != rhs;
 	}
 	Boolean operator!=(const Boolean& lhs, const Boolean& rhs) noexcept
 	{
-		return lhs.value_ != rhs.value_;
+		return lhs.m_Value != rhs.m_Value;
+	}
+	Boolean operator&(bool lhs, const Boolean& rhs) noexcept
+	{
+		return lhs & rhs.m_Value;
+	}
+	Boolean operator&(const Boolean& lhs, bool rhs) noexcept
+	{
+		return lhs.m_Value & rhs;
+	}
+	Boolean operator&(const Boolean& lhs, const Boolean& rhs) noexcept
+	{
+		return lhs.m_Value & rhs.m_Value;
+	}
+	Boolean operator|(bool lhs, const Boolean& rhs) noexcept
+	{
+		return lhs | rhs.m_Value;
+	}
+	Boolean operator|(const Boolean& lhs, bool rhs) noexcept
+	{
+		return lhs.m_Value | rhs;
+	}
+	Boolean operator|(const Boolean& lhs, const Boolean& rhs) noexcept
+	{
+		return lhs.m_Value | rhs.m_Value;
+	}
+	Boolean operator^(bool lhs, const Boolean& rhs) noexcept
+	{
+		return lhs ^ rhs.m_Value;
+	}
+	Boolean operator^(const Boolean& lhs, bool rhs) noexcept
+	{
+		return lhs.m_Value ^ rhs;
+	}
+	Boolean operator^(const Boolean& lhs, const Boolean& rhs) noexcept
+	{
+		return lhs.m_Value ^ rhs.m_Value;
 	}
 	Boolean operator&&(bool lhs, const Boolean& rhs) noexcept
 	{
-		return lhs && rhs.value_;
+		return lhs && rhs.m_Value;
 	}
 	Boolean operator&&(const Boolean& lhs, bool rhs) noexcept
 	{
-		return lhs.value_ && rhs;
+		return lhs.m_Value && rhs;
 	}
 	Boolean operator&&(const Boolean& lhs, const Boolean& rhs) noexcept
 	{
-		return lhs.value_ && rhs.value_;
+		return lhs.m_Value && rhs.m_Value;
 	}
 	Boolean operator||(bool lhs, const Boolean& rhs) noexcept
 	{
-		return lhs || rhs.value_;
+		return lhs || rhs.m_Value;
 	}
 	Boolean operator||(const Boolean& lhs, bool rhs) noexcept
 	{
-		return lhs.value_ || rhs;
+		return lhs.m_Value || rhs;
 	}
 	Boolean operator||(const Boolean& lhs, const Boolean& rhs) noexcept
 	{
-		return lhs.value_ || rhs.value_;
+		return lhs.m_Value || rhs.m_Value;
 	}
 	Boolean operator!(const Boolean& boolean) noexcept
 	{
-		return !boolean.value_;
+		return !boolean.m_Value;
 	}
 	Boolean::operator bool() const noexcept
 	{
-		return value_;
+		return m_Value;
 	}
 
 	Int32 Boolean::GetHashCode() const
 	{
-		return value_;
+		return m_Value;
 	}
 	std::u16string Boolean::ToString() const
 	{
-		return value_ ? Boolean::TrueString : Boolean::FalseString;
+		return m_Value ? Boolean::TrueString : Boolean::FalseString;
 	}
 	Int32 Boolean::CompareTo(const Boolean& other) const
 	{
-		return static_cast<int>(value_) - other.value_;
+		return static_cast<int>(m_Value) - other.m_Value;
 	}
 	Int32 Boolean::CompareTo(const Object& other) const
 	{
@@ -95,6 +135,12 @@ namespace CppNet2::System
 	Boolean Boolean::Equals(const Boolean& other) const
 	{
 		return *this == other;
+	}
+	Boolean Boolean::Equals(const Object& other) const
+	{
+		if (const Boolean* other_boolean = dynamic_cast<const Boolean*>(&other);
+			other_boolean) return Equals(*other_boolean);
+		else return false;
 	}
 
 	const std::u16string Boolean::TrueString = u"True";

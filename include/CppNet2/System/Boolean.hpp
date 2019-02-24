@@ -22,6 +22,7 @@ namespace CppNet2::System
 		virtual ~Boolean() override = default;
 
 	public:
+		Boolean& operator=(bool boolean) noexcept;
 		Boolean& operator=(const Boolean& boolean) noexcept;
 		CPPNET2_EXPORT friend Boolean operator==(bool lhs, const Boolean& rhs) noexcept;
 		CPPNET2_EXPORT friend Boolean operator==(const Boolean& lhs, bool rhs) noexcept;
@@ -29,6 +30,15 @@ namespace CppNet2::System
 		CPPNET2_EXPORT friend Boolean operator!=(bool lhs, const Boolean& rhs) noexcept;
 		CPPNET2_EXPORT friend Boolean operator!=(const Boolean& lhs, bool rhs) noexcept;
 		CPPNET2_EXPORT friend Boolean operator!=(const Boolean& lhs, const Boolean& rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator&(bool lhs, const Boolean& rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator&(const Boolean& lhs, bool rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator&(const Boolean& lhs, const Boolean& rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator|(bool lhs, const Boolean& rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator|(const Boolean& lhs, bool rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator|(const Boolean& lhs, const Boolean& rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator^(bool lhs, const Boolean& rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator^(const Boolean& lhs, bool rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator^(const Boolean& lhs, const Boolean& rhs) noexcept;
 		CPPNET2_EXPORT friend Boolean operator&&(bool lhs, const Boolean& rhs) noexcept;
 		CPPNET2_EXPORT friend Boolean operator&&(const Boolean& lhs, bool rhs) noexcept;
 		CPPNET2_EXPORT friend Boolean operator&&(const Boolean& lhs, const Boolean& rhs) noexcept;
@@ -44,9 +54,10 @@ namespace CppNet2::System
 		virtual Int32 CompareTo(const Boolean& other) const override;
 		virtual Int32 CompareTo(const Object& other) const override;
 		virtual Boolean Equals(const Boolean& other) const override;
+		virtual Boolean Equals(const Object& other) const override;
 
 	private:
-		bool value_ = false;
+		bool m_Value = false;
 
 	public:
 		static const std::u16string TrueString;

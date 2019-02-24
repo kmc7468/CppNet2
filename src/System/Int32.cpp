@@ -8,295 +8,295 @@
 namespace CppNet2::System
 {
 	Int32::Int32(std::int32_t integer) noexcept
-		: value_(integer)
+		: m_Value(integer)
 	{}
 	Int32::Int32(const Int32& integer) noexcept
-		: value_(integer.value_)
+		: m_Value(integer.m_Value)
 	{}
 
 	Int32& Int32::operator=(std::int32_t integer) noexcept
 	{
-		return value_ = integer, *this;
+		return m_Value = integer, *this;
 	}
 	Int32& Int32::operator=(const Int32& integer) noexcept
 	{
-		return value_ = integer.value_, *this;
+		return m_Value = integer.m_Value, *this;
 	}
 	Boolean operator==(std::int32_t lhs, const Int32& rhs) noexcept
 	{
-		return lhs == rhs.value_;
+		return lhs == rhs.m_Value;
 	}
 	Boolean operator==(const Int32& lhs, std::int32_t rhs) noexcept
 	{
-		return lhs.value_ == rhs;
+		return lhs.m_Value == rhs;
 	}
 	Boolean operator==(const Int32& lhs, const Int32& rhs) noexcept
 	{
-		return lhs.value_ == rhs.value_;
+		return lhs.m_Value == rhs.m_Value;
 	}
 	Boolean operator!=(std::int32_t lhs, const Int32& rhs) noexcept
 	{
-		return lhs != rhs.value_;
+		return lhs != rhs.m_Value;
 	}
 	Boolean operator!=(const Int32& lhs, std::int32_t rhs) noexcept
 	{
-		return lhs.value_ != rhs;
+		return lhs.m_Value != rhs;
 	}
 	Boolean operator!=(const Int32& lhs, const Int32& rhs) noexcept
 	{
-		return lhs.value_ != rhs.value_;
+		return lhs.m_Value != rhs.m_Value;
 	}
 	Boolean operator>(std::int32_t lhs, const Int32& rhs) noexcept
 	{
-		return lhs > rhs.value_;
+		return lhs > rhs.m_Value;
 	}
 	Boolean operator>(const Int32& lhs, std::int32_t rhs) noexcept
 	{
-		return lhs.value_ > rhs;
+		return lhs.m_Value > rhs;
 	}
 	Boolean operator>(const Int32& lhs, const Int32& rhs) noexcept
 	{
-		return lhs.value_ > rhs.value_;
+		return lhs.m_Value > rhs.m_Value;
 	}
 	Boolean operator>=(std::int32_t lhs, const Int32& rhs) noexcept
 	{
-		return lhs >= rhs.value_;
+		return lhs >= rhs.m_Value;
 	}
 	Boolean operator>=(const Int32& lhs, std::int32_t rhs) noexcept
 	{
-		return lhs.value_ >= rhs;
+		return lhs.m_Value >= rhs;
 	}
 	Boolean operator>=(const Int32& lhs, const Int32& rhs) noexcept
 	{
-		return lhs.value_ >= rhs.value_;
+		return lhs.m_Value >= rhs.m_Value;
 	}
 	Boolean operator<(std::int32_t lhs, const Int32& rhs) noexcept
 	{
-		return lhs < rhs.value_;
+		return lhs < rhs.m_Value;
 	}
 	Boolean operator<(const Int32& lhs, std::int32_t rhs) noexcept
 	{
-		return lhs.value_ < rhs;
+		return lhs.m_Value < rhs;
 	}
 	Boolean operator<(const Int32& lhs, const Int32& rhs) noexcept
 	{
-		return lhs.value_ < rhs.value_;
+		return lhs.m_Value < rhs.m_Value;
 	}
 	Boolean operator<=(std::int32_t lhs, const Int32& rhs) noexcept
 	{
-		return lhs <= rhs.value_;
+		return lhs <= rhs.m_Value;
 	}
 	Boolean operator<=(const Int32& lhs, std::int32_t rhs) noexcept
 	{
-		return lhs.value_ <= rhs;
+		return lhs.m_Value <= rhs;
 	}
 	Boolean operator<=(const Int32& lhs, const Int32& rhs) noexcept
 	{
-		return lhs.value_ <= rhs.value_;
+		return lhs.m_Value <= rhs.m_Value;
 	}
 	Int32::operator std::int32_t() const noexcept
 	{
-		return value_;
+		return m_Value;
 	}
 	Int32 operator+(std::int32_t lhs, const Int32& rhs) noexcept
 	{
-		return lhs + rhs.value_;
+		return lhs + rhs.m_Value;
 	}
 	Int32 operator+(const Int32& lhs, std::int32_t rhs) noexcept
 	{
-		return lhs.value_ + rhs;
+		return lhs.m_Value + rhs;
 	}
 	Int32 operator+(const Int32& lhs, const Int32& rhs) noexcept
 	{
-		return lhs.value_ + rhs.value_;
+		return lhs.m_Value + rhs.m_Value;
 	}
 	Int32 operator-(std::int32_t lhs, const Int32& rhs) noexcept
 	{
-		return lhs - rhs.value_;
+		return lhs - rhs.m_Value;
 	}
 	Int32 operator-(const Int32& lhs, std::int32_t rhs) noexcept
 	{
-		return lhs.value_ - rhs;
+		return lhs.m_Value - rhs;
 	}
 	Int32 operator-(const Int32& lhs, const Int32& rhs) noexcept
 	{
-		return lhs.value_ - rhs.value_;
+		return lhs.m_Value - rhs.m_Value;
 	}
 	Int32 operator*(std::int32_t lhs, const Int32& rhs) noexcept
 	{
-		return lhs * rhs.value_;
+		return lhs * rhs.m_Value;
 	}
 	Int32 operator*(const Int32& lhs, std::int32_t rhs) noexcept
 	{
-		return lhs.value_ * rhs;
+		return lhs.m_Value * rhs;
 	}
 	Int32 operator*(const Int32& lhs, const Int32& rhs) noexcept
 	{
-		return lhs.value_ * rhs.value_;
+		return lhs.m_Value * rhs.m_Value;
 	}
 	Int32 operator/(std::int32_t lhs, const Int32& rhs) noexcept
 	{
-		return lhs / rhs.value_;
+		return lhs / rhs.m_Value;
 	}
 	Int32 operator/(const Int32& lhs, std::int32_t rhs) noexcept
 	{
-		return lhs.value_ / rhs;
+		return lhs.m_Value / rhs;
 	}
 	Int32 operator/(const Int32& lhs, const Int32& rhs) noexcept
 	{
-		return lhs.value_ / rhs.value_;
+		return lhs.m_Value / rhs.m_Value;
 	}
 	Int32 operator%(std::int32_t lhs, const Int32& rhs) noexcept
 	{
-		return lhs % rhs.value_;
+		return lhs % rhs.m_Value;
 	}
 	Int32 operator%(const Int32& lhs, std::int32_t rhs) noexcept
 	{
-		return lhs.value_ % rhs;
+		return lhs.m_Value % rhs;
 	}
 	Int32 operator%(const Int32& lhs, const Int32& rhs) noexcept
 	{
-		return lhs.value_ % rhs.value_;
+		return lhs.m_Value % rhs.m_Value;
 	}
 	Int32 operator&(std::int32_t lhs, const Int32& rhs) noexcept
 	{
-		return lhs & rhs.value_;
+		return lhs & rhs.m_Value;
 	}
 	Int32 operator&(const Int32& lhs, std::int32_t rhs) noexcept
 	{
-		return lhs.value_ & rhs;
+		return lhs.m_Value & rhs;
 	}
 	Int32 operator&(const Int32& lhs, const Int32& rhs) noexcept
 	{
-		return lhs.value_ & rhs.value_;
+		return lhs.m_Value & rhs.m_Value;
 	}
 	Int32 operator|(std::int32_t lhs, const Int32& rhs) noexcept
 	{
-		return lhs | rhs.value_;
+		return lhs | rhs.m_Value;
 	}
 	Int32 operator|(const Int32& lhs, std::int32_t rhs) noexcept
 	{
-		return lhs.value_ | rhs;
+		return lhs.m_Value | rhs;
 	}
 	Int32 operator|(const Int32& lhs, const Int32& rhs) noexcept
 	{
-		return lhs.value_ | rhs.value_;
+		return lhs.m_Value | rhs.m_Value;
 	}
 	Int32 operator^(std::int32_t lhs, const Int32& rhs) noexcept
 	{
-		return lhs ^ rhs.value_;
+		return lhs ^ rhs.m_Value;
 	}
 	Int32 operator^(const Int32& lhs, std::int32_t rhs) noexcept
 	{
-		return lhs.value_ ^ rhs;
+		return lhs.m_Value ^ rhs;
 	}
 	Int32 operator^(const Int32& lhs, const Int32& rhs) noexcept
 	{
-		return lhs.value_ ^ rhs.value_;
+		return lhs.m_Value ^ rhs.m_Value;
 	}
 	Int32 operator<<(std::int32_t lhs, const Int32& rhs) noexcept
 	{
-		return lhs << rhs.value_;
+		return lhs << rhs.m_Value;
 	}
 	Int32 operator<<(const Int32& lhs, std::int32_t rhs) noexcept
 	{
-		return lhs.value_ << rhs;
+		return lhs.m_Value << rhs;
 	}
 	Int32 operator<<(const Int32& lhs, const Int32& rhs) noexcept
 	{
-		return lhs.value_ << rhs.value_;
+		return lhs.m_Value << rhs.m_Value;
 	}
 	Int32 operator>>(std::int32_t lhs, const Int32& rhs) noexcept
 	{
-		return lhs >> rhs.value_;
+		return lhs >> rhs.m_Value;
 	}
 	Int32 operator>>(const Int32& lhs, std::int32_t rhs) noexcept
 	{
-		return lhs.value_ >> rhs;
+		return lhs.m_Value >> rhs;
 	}
 	Int32 operator>>(const Int32& lhs, const Int32& rhs) noexcept
 	{
-		return lhs.value_ >> rhs.value_;
+		return lhs.m_Value >> rhs.m_Value;
 	}
 	Int32& Int32::operator+=(std::int32_t integer) noexcept
 	{
-		return value_ += integer, *this;
+		return m_Value += integer, *this;
 	}
 	Int32& Int32::operator+=(const Int32& integer) noexcept
 	{
-		return value_ += integer.value_, *this;
+		return m_Value += integer.m_Value, *this;
 	}
 	Int32& Int32::operator-=(std::int32_t integer) noexcept
 	{
-		return value_ -= integer, *this;
+		return m_Value -= integer, *this;
 	}
 	Int32& Int32::operator-=(const Int32& integer) noexcept
 	{
-		return value_ -= integer.value_, *this;
+		return m_Value -= integer.m_Value, *this;
 	}
 	Int32& Int32::operator*=(std::int32_t integer) noexcept
 	{
-		return value_ *= integer, *this;
+		return m_Value *= integer, *this;
 	}
 	Int32& Int32::operator*=(const Int32& integer) noexcept
 	{
-		return value_ *= integer.value_, *this;
+		return m_Value *= integer.m_Value, *this;
 	}
 	Int32& Int32::operator/=(std::int32_t integer) noexcept
 	{
-		return value_ /= integer, *this;
+		return m_Value /= integer, *this;
 	}
 	Int32& Int32::operator/=(const Int32& integer) noexcept
 	{
-		return value_ /= integer.value_, *this;
+		return m_Value /= integer.m_Value, *this;
 	}
 	Int32& Int32::operator%=(std::int32_t integer) noexcept
 	{
-		return value_ %= integer, *this;
+		return m_Value %= integer, *this;
 	}
 	Int32& Int32::operator%=(const Int32& integer) noexcept
 	{
-		return value_ %= integer.value_, *this;
+		return m_Value %= integer.m_Value, *this;
 	}
 	Int32& Int32::operator&=(std::int32_t integer) noexcept
 	{
-		return value_ &= integer, *this;
+		return m_Value &= integer, *this;
 	}
 	Int32& Int32::operator&=(const Int32& integer) noexcept
 	{
-		return value_ &= integer.value_, *this;
+		return m_Value &= integer.m_Value, *this;
 	}
 	Int32& Int32::operator|=(std::int32_t integer) noexcept
 	{
-		return value_ |= integer, *this;
+		return m_Value |= integer, *this;
 	}
 	Int32& Int32::operator|=(const Int32& integer) noexcept
 	{
-		return value_ |= integer.value_, *this;
+		return m_Value |= integer.m_Value, *this;
 	}
 	Int32& Int32::operator^=(std::int32_t integer) noexcept
 	{
-		return value_ ^= integer, *this;
+		return m_Value ^= integer, *this;
 	}
 	Int32& Int32::operator^=(const Int32& integer) noexcept
 	{
-		return value_ ^= integer.value_, *this;
+		return m_Value ^= integer.m_Value, *this;
 	}
 	Int32& Int32::operator<<=(std::int32_t integer) noexcept
 	{
-		return value_ <<= integer, *this;
+		return m_Value <<= integer, *this;
 	}
 	Int32& Int32::operator<<=(const Int32& integer) noexcept
 	{
-		return value_ <<= integer.value_, *this;
+		return m_Value <<= integer.m_Value, *this;
 	}
 	Int32& Int32::operator>>=(std::int32_t integer) noexcept
 	{
-		return value_ >>= integer, *this;
+		return m_Value >>= integer, *this;
 	}
 	Int32& Int32::operator>>=(const Int32& integer) noexcept
 	{
-		return value_ >>= integer.value_, *this;
+		return m_Value >>= integer.m_Value, *this;
 	}
 	Int32 operator+(const Int32& integer) noexcept
 	{
@@ -304,16 +304,16 @@ namespace CppNet2::System
 	}
 	Int32 operator-(const Int32& integer) noexcept
 	{
-		return -integer.value_;
+		return -integer.m_Value;
 	}
 	Int32 operator~(const Int32& integer) noexcept
 	{
-		return ~integer.value_;
+		return ~integer.m_Value;
 	}
 
 	Int32 Int32::GetHashCode() const
 	{
-		return value_;
+		return m_Value;
 	}
 	std::u16string Int32::ToString() const
 	{
@@ -321,7 +321,7 @@ namespace CppNet2::System
 	}
 	Int32 Int32::CompareTo(const Int32& other) const
 	{
-		return value_ - other.value_;
+		return m_Value - other.m_Value;
 	}
 	Int32 Int32::CompareTo(const Object& other) const
 	{
@@ -332,6 +332,12 @@ namespace CppNet2::System
 	Boolean Int32::Equals(const Int32& other) const
 	{
 		return *this == other;
+	}
+	Boolean Int32::Equals(const Object& other) const
+	{
+		if (const Int32* other_int32 = dynamic_cast<const Int32*>(&other);
+			other_int32) return Equals(*other_int32);
+		else return false;
 	}
 
 	const Int32 Int32::MaxValue = std::numeric_limits<std::int32_t>::max();
