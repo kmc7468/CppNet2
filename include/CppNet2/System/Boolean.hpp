@@ -4,6 +4,7 @@
 
 #include <CppNet2/System/IComparable.hpp>
 #include <CppNet2/System/IEquatable.hpp>
+#include <CppNet2/System/Object.hpp>
 
 #include <string>
 
@@ -11,7 +12,8 @@ namespace CppNet2::System
 {
 	class Int32;
 	
-	class CPPNET2_EXPORT Boolean final : public IComparable<Boolean>, public IEquatable<Boolean>
+	class CPPNET2_EXPORT Boolean final : public Object,
+		public IComparable<>, public IComparable<Boolean>, public IEquatable<Boolean>
 	{
 	public:
 		Boolean() noexcept = default;
@@ -37,7 +39,10 @@ namespace CppNet2::System
 		operator bool() const noexcept;
 
 	public:
+		virtual Int32 GetHashCode() const override;
+		virtual std::u16string ToString() const override;
 		virtual Int32 CompareTo(const Boolean& other) const override;
+		virtual Int32 CompareTo(const Object& other) const override;
 		virtual Boolean Equals(const Boolean& other) const override;
 
 	private:

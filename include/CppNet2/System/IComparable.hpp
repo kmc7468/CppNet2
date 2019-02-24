@@ -1,11 +1,13 @@
 #ifndef CPPNET2_HEADER_SYSTEM_ICOMPARABLE_HPP
 #define CPPNET2_HEADER_SYSTEM_ICOMPARABLE_HPP
 
+#include <CppNet2/System/Object.hpp>
+
 namespace CppNet2::System
 {
 	class Int32;
 
-	template<typename T>
+	template<typename T = Object>
 	struct IComparable
 	{
 		virtual ~IComparable() = default;

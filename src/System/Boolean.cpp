@@ -2,6 +2,8 @@
 
 #include <CppNet2/System/Int32.hpp>
 
+#include <typeinfo>
+
 namespace CppNet2::System
 {
 	Boolean::Boolean(bool boolean) noexcept
@@ -72,9 +74,23 @@ namespace CppNet2::System
 		return value_;
 	}
 
+	Int32 Boolean::GetHashCode() const
+	{
+		return value_;
+	}
+	std::u16string Boolean::ToString() const
+	{
+		return value_ ? Boolean::TrueString : Boolean::FalseString;
+	}
 	Int32 Boolean::CompareTo(const Boolean& other) const
 	{
 		return static_cast<int>(value_) - other.value_;
+	}
+	Int32 Boolean::CompareTo(const Object& other) const
+	{
+		if (const Boolean* const other_boolean = dynamic_cast<const Boolean*>(&other);
+			other_boolean) return CompareTo(*other_boolean);
+		throw std::bad_cast();
 	}
 	Boolean Boolean::Equals(const Boolean& other) const
 	{

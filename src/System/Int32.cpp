@@ -3,6 +3,7 @@
 #include <CppNet2/System/Boolean.hpp>
 
 #include <limits>
+#include <typeinfo>
 
 namespace CppNet2::System
 {
@@ -310,9 +311,23 @@ namespace CppNet2::System
 		return ~integer.value_;
 	}
 
+	Int32 Int32::GetHashCode() const
+	{
+		return value_;
+	}
+	std::u16string Int32::ToString() const
+	{
+		return {}; // TODO
+	}
 	Int32 Int32::CompareTo(const Int32& other) const
 	{
 		return value_ - other.value_;
+	}
+	Int32 Int32::CompareTo(const Object& other) const
+	{
+		if (const Int32* const other_int32 = dynamic_cast<const Int32*>(&other);
+			other_int32) return CompareTo(*other_int32);
+		throw std::bad_cast();
 	}
 	Boolean Int32::Equals(const Int32& other) const
 	{
