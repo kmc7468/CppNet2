@@ -1,5 +1,7 @@
 #include <CppNet2/System/Int32.hpp>
 
+#include <CppNet2/System/Boolean.hpp>
+
 #include <limits>
 
 namespace CppNet2::System
@@ -19,27 +21,75 @@ namespace CppNet2::System
 	{
 		return value_ = integer.value_, *this;
 	}
-	bool operator==(const Int32& lhs, const Int32& rhs) noexcept
+	Boolean operator==(std::int32_t lhs, const Int32& rhs) noexcept
+	{
+		return lhs == rhs.value_;
+	}
+	Boolean operator==(const Int32& lhs, std::int32_t rhs) noexcept
+	{
+		return lhs.value_ == rhs;
+	}
+	Boolean operator==(const Int32& lhs, const Int32& rhs) noexcept
 	{
 		return lhs.value_ == rhs.value_;
 	}
-	bool operator!=(const Int32& lhs, const Int32& rhs) noexcept
+	Boolean operator!=(std::int32_t lhs, const Int32& rhs) noexcept
+	{
+		return lhs != rhs.value_;
+	}
+	Boolean operator!=(const Int32& lhs, std::int32_t rhs) noexcept
+	{
+		return lhs.value_ != rhs;
+	}
+	Boolean operator!=(const Int32& lhs, const Int32& rhs) noexcept
 	{
 		return lhs.value_ != rhs.value_;
 	}
-	bool operator>(const Int32& lhs, const Int32& rhs) noexcept
+	Boolean operator>(std::int32_t lhs, const Int32& rhs) noexcept
+	{
+		return lhs > rhs.value_;
+	}
+	Boolean operator>(const Int32& lhs, std::int32_t rhs) noexcept
+	{
+		return lhs.value_ > rhs;
+	}
+	Boolean operator>(const Int32& lhs, const Int32& rhs) noexcept
 	{
 		return lhs.value_ > rhs.value_;
 	}
-	bool operator>=(const Int32& lhs, const Int32& rhs) noexcept
+	Boolean operator>=(std::int32_t lhs, const Int32& rhs) noexcept
+	{
+		return lhs >= rhs.value_;
+	}
+	Boolean operator>=(const Int32& lhs, std::int32_t rhs) noexcept
+	{
+		return lhs.value_ >= rhs;
+	}
+	Boolean operator>=(const Int32& lhs, const Int32& rhs) noexcept
 	{
 		return lhs.value_ >= rhs.value_;
 	}
-	bool operator<(const Int32& lhs, const Int32& rhs) noexcept
+	Boolean operator<(std::int32_t lhs, const Int32& rhs) noexcept
+	{
+		return lhs < rhs.value_;
+	}
+	Boolean operator<(const Int32& lhs, std::int32_t rhs) noexcept
+	{
+		return lhs.value_ < rhs;
+	}
+	Boolean operator<(const Int32& lhs, const Int32& rhs) noexcept
 	{
 		return lhs.value_ < rhs.value_;
 	}
-	bool operator<=(const Int32& lhs, const Int32& rhs) noexcept
+	Boolean operator<=(std::int32_t lhs, const Int32& rhs) noexcept
+	{
+		return lhs <= rhs.value_;
+	}
+	Boolean operator<=(const Int32& lhs, std::int32_t rhs) noexcept
+	{
+		return lhs.value_ <= rhs;
+	}
+	Boolean operator<=(const Int32& lhs, const Int32& rhs) noexcept
 	{
 		return lhs.value_ <= rhs.value_;
 	}
@@ -260,11 +310,11 @@ namespace CppNet2::System
 		return ~integer.value_;
 	}
 
-	Int32 Int32::CompareTo(const Int32& other)
+	Int32 Int32::CompareTo(const Int32& other) const
 	{
 		return value_ - other.value_;
 	}
-	bool Int32::Equals(const Int32& other)
+	Boolean Int32::Equals(const Int32& other) const
 	{
 		return *this == other;
 	}

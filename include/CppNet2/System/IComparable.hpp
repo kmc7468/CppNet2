@@ -10,7 +10,7 @@ namespace CppNet2::System
 	{
 		virtual ~IComparable() = default;
 
-		virtual Int32 CompareTo(const T& other) = 0;
+		virtual Int32 CompareTo(const T& other) const = 0;
 	};
 }
 

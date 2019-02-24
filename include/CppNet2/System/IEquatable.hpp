@@ -3,12 +3,14 @@
 
 namespace CppNet2::System
 {
+	class Boolean;
+
 	template<typename T>
 	struct IEquatable
 	{
 		virtual ~IEquatable() = default;
 
-		virtual bool Equals(const T& other) = 0;
+		virtual Boolean Equals(const T& other) const = 0;
 	};
 }
 
