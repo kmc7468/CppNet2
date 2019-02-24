@@ -2,6 +2,7 @@
 
 #include <CppNet2/System/Boolean.hpp>
 #include <CppNet2/System/Int32.hpp>
+#include <CppNet2/System/String.hpp>
 
 #include <cstdint>
 #include <functional>
@@ -16,9 +17,11 @@ namespace CppNet2::System
 	{
 		return static_cast<std::int32_t>(std::hash<std::uintptr_t>()(reinterpret_cast<std::uintptr_t>(this)));
 	}
-	std::u16string Object::ToString() const
+	String Object::ToString() const
 	{
-		return u"CppNet2::System::Object";
+		using namespace StringLiterals;
+
+		return u"CppNet2::System::Object"_s;
 	}
 
 	Boolean Object::Equals(const Object& a, const Object& b)

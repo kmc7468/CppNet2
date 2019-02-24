@@ -5,8 +5,7 @@
 #include <CppNet2/System/IComparable.hpp>
 #include <CppNet2/System/IEquatable.hpp>
 #include <CppNet2/System/Object.hpp>
-
-#include <string>
+#include <CppNet2/System/String.hpp>
 
 namespace CppNet2::System
 {
@@ -50,7 +49,7 @@ namespace CppNet2::System
 
 	public:
 		virtual Int32 GetHashCode() const override;
-		virtual std::u16string ToString() const override;
+		virtual String ToString() const override;
 		virtual Int32 CompareTo(const Boolean& other) const override;
 		virtual Int32 CompareTo(const Object& other) const override;
 		virtual Boolean Equals(const Boolean& other) const override;
@@ -60,9 +59,12 @@ namespace CppNet2::System
 		bool m_Value = false;
 
 	public:
-		static const std::u16string TrueString;
-		static const std::u16string FalseString;
+		static const String TrueString;
+		static const String FalseString;
 	};
+
+	inline const String Boolean::TrueString = u"True";
+	inline const String Boolean::FalseString = u"False";
 }
 
 #endif

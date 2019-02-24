@@ -1,6 +1,8 @@
 #include <CppNet2/System/Char.hpp>
 
-#include <limits>
+#include <CppNet2/System/Boolean.hpp>
+#include <CppNet2/System/String.hpp>
+
 #include <typeinfo>
 
 namespace CppNet2::System
@@ -296,6 +298,24 @@ namespace CppNet2::System
 	{
 		return ~character.m_Value;
 	}
+	Char& Char::operator++() noexcept
+	{
+		return ++m_Value, * this;
+	}
+	Char Char::operator++(int) noexcept
+	{
+		const Char temp(*this);
+		return ++m_Value, temp;
+	}
+	Char& Char::operator--() noexcept
+	{
+		return --m_Value, * this;
+	}
+	Char Char::operator--(int) noexcept
+	{
+		const Char temp(*this);
+		return --m_Value, temp;
+	}
 	Char::operator char16_t() const noexcept
 	{
 		return m_Value;
@@ -305,7 +325,7 @@ namespace CppNet2::System
 	{
 		return m_Value;
 	}
-	std::u16string Char::ToString() const
+	String Char::ToString() const
 	{
 		return {}; // TODO
 	}
@@ -329,7 +349,4 @@ namespace CppNet2::System
 			other_char) return Equals(*other_char);
 		else return false;
 	}
-
-	const Char Char::MaxValue = std::numeric_limits<char16_t>::max();
-	const Char Char::MinValue = std::numeric_limits<char16_t>::min();
 }

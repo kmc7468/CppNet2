@@ -1,8 +1,8 @@
 #include <CppNet2/System/Int32.hpp>
 
 #include <CppNet2/System/Boolean.hpp>
+#include <CppNet2/System/String.hpp>
 
-#include <limits>
 #include <typeinfo>
 
 namespace CppNet2::System
@@ -310,12 +310,30 @@ namespace CppNet2::System
 	{
 		return ~integer.m_Value;
 	}
+	Int32& Int32::operator++() noexcept
+	{
+		return ++m_Value, *this;
+	}
+	Int32 Int32::operator++(int) noexcept
+	{
+		const Int32 temp(*this);
+		return ++m_Value, temp;
+	}
+	Int32& Int32::operator--() noexcept
+	{
+		return --m_Value, * this;
+	}
+	Int32 Int32::operator--(int) noexcept
+	{
+		const Int32 temp(*this);
+		return --m_Value, temp;
+	}
 
 	Int32 Int32::GetHashCode() const
 	{
 		return m_Value;
 	}
-	std::u16string Int32::ToString() const
+	String Int32::ToString() const
 	{
 		return {}; // TODO
 	}
@@ -339,7 +357,4 @@ namespace CppNet2::System
 			other_int32) return Equals(*other_int32);
 		else return false;
 	}
-
-	const Int32 Int32::MaxValue = std::numeric_limits<std::int32_t>::max();
-	const Int32 Int32::MinValue = std::numeric_limits<std::int32_t>::min();
 }

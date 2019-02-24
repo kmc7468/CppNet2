@@ -118,7 +118,7 @@ namespace CppNet2::System
 	{
 		return m_Value;
 	}
-	std::u16string Boolean::ToString() const
+	String Boolean::ToString() const
 	{
 		return m_Value ? Boolean::TrueString : Boolean::FalseString;
 	}
@@ -142,7 +142,4 @@ namespace CppNet2::System
 			other_boolean) return Equals(*other_boolean);
 		else return false;
 	}
-
-	const std::u16string Boolean::TrueString = u"True";
-	const std::u16string Boolean::FalseString = u"False";
 }

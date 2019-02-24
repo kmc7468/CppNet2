@@ -8,6 +8,7 @@ namespace CppNet2::System
 {
 	class Boolean;
 	class Int32;
+	class String;
 
 	class CPPNET2_EXPORT Object
 	{
@@ -22,7 +23,7 @@ namespace CppNet2::System
 	public:
 		virtual Boolean Equals(const Object& other) const;
 		virtual Int32 GetHashCode() const;
-		virtual std::u16string ToString() const;
+		virtual String ToString() const;
 
 	public:
 		static Boolean Equals(const Object& a, const Object& b);
