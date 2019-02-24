@@ -2,11 +2,14 @@
 #define CPPNET2_HEADER_SYSTEM_INT32_HPP
 #include <CppNet2/Config.hpp>
 
+#include <CppNet2/System/IComparable.hpp>
+#include <CppNet2/System/IEquatable.hpp>
+
 #include <cstdint>
 
 namespace CppNet2::System
 {
-	class CPPNET2_EXPORT Int32 final
+	class CPPNET2_EXPORT Int32 final : public IComparable<Int32>, public IEquatable<Int32>
 	{
 	public:
 		Int32() noexcept = default;
@@ -77,6 +80,10 @@ namespace CppNet2::System
 		CPPNET2_EXPORT friend Int32 operator-(const Int32& integer) noexcept;
 		CPPNET2_EXPORT friend Int32 operator~(const Int32& integer) noexcept;
 		operator std::int32_t() const noexcept;
+
+	public:
+		virtual Int32 CompareTo(const Int32& other) override;
+		virtual bool Equals(const Int32& other) override;
 
 	private:
 		std::int32_t value_ = 0;

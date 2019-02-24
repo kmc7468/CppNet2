@@ -260,6 +260,15 @@ namespace CppNet2::System
 		return ~integer.value_;
 	}
 
+	Int32 Int32::CompareTo(const Int32& other)
+	{
+		return value_ - other.value_;
+	}
+	bool Int32::Equals(const Int32& other)
+	{
+		return *this == other;
+	}
+
 	const Int32 Int32::MaxValue = std::numeric_limits<std::int32_t>::max();
 	const Int32 Int32::MinValue = std::numeric_limits<std::int32_t>::min();
 }
