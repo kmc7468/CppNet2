@@ -10,9 +10,10 @@ addons:
 			- g++-7
 
 before_script:
-	- mkdir build
+	- mkdir -p build
+	- cd build
 
 script:
-	- export CC=gcc-7
-	- export CXX=g++-7
-	- cmake --build ./build
+	- cmake ..
+	- make
+	- cd ..
