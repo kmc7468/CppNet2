@@ -1,21 +1,26 @@
+dist: trusty
 language: cpp
-compiler: gcc
 
-addons:
-    apt:
-        sources:
-            - ubuntu-toolchain-r-test
-        packages:
-            - gcc-7
-            - g++-7
+matrix:
+    include:
+        - os: linux
+          addons:
+            apt:
+                - ubuntu-toolchain-r-test
+                - george-edison55-precise-backports
+            packages:
+                - g++-7
+                - cmake-data
+                - cmake
+          env:
+            - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
 
 before_script:
+    - eval "${MATRIX_EVAL}"
     - mkdir -p build
     - cd build
 
 script:
-    - export CC=gcc-7
-    - export CXX=g++7
     - cmake ..
     - make
     - cd ..
