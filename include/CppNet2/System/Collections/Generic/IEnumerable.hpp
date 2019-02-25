@@ -1,6 +1,5 @@
 #ifndef CPPNET2_HEADER_SYSTEM_COLLECTIONS_GENERIC_IENUMERABLE_HPP
 #define CPPNET2_HEADER_SYSTEM_COLLECTIONS_GENERIC_IENUMERABLE_HPP
-#include <CppNet2/Config.hpp>
 
 #include <CppNet2/System/Collections/Generic/IEnumerator.hpp>
 

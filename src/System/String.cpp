@@ -10,6 +10,30 @@
 #include <stdexcept>
 #include <utility>
 
+namespace CppNet2::Details::System
+{
+	std::unique_ptr<CppNet2::System::Collections::Generic::IEnumeratorConst<CppNet2::System::Char>> StringBase1::GetEnumerator() const
+	{
+		return GetEnumeratorBase1();
+	}
+	std::unique_ptr<CppNet2::System::Collections::Generic::IEnumerator<CppNet2::System::Char>> StringBase1::GetEnumerator()
+	{
+		return GetEnumeratorBase1();
+	}
+}
+
+namespace CppNet2::Details::System
+{
+	CppNet2::System::CharEnumeratorConst StringBase2::GetEnumerator() const
+	{
+		return GetEnumeratorBase2();
+	}
+	CppNet2::System::CharEnumerator StringBase2::GetEnumerator()
+	{
+		return GetEnumeratorBase2();
+	}
+}
+
 namespace CppNet2::System
 {
 	CharEnumeratorConst::CharEnumeratorConst(const CharEnumerator& enumerator) noexcept
@@ -300,13 +324,22 @@ namespace CppNet2::System
 			other_string) return Equals(*other_string);
 		else return false;
 	}
-	std::unique_ptr<Collections::Generic::IEnumeratorConst<Char>> String::GetEnumerator() const
+
+	std::unique_ptr<CppNet2::System::Collections::Generic::IEnumeratorConst<CppNet2::System::Char>> String::GetEnumeratorBase1() const
 	{
 		return std::unique_ptr<Collections::Generic::IEnumeratorConst<Char>>(new CharEnumeratorConst(this));
 	}
-	std::unique_ptr<Collections::Generic::IEnumerator<Char>> String::GetEnumerator()
+	std::unique_ptr<CppNet2::System::Collections::Generic::IEnumerator<CppNet2::System::Char>> String::GetEnumeratorBase1()
 	{
 		return std::unique_ptr<Collections::Generic::IEnumerator<Char>>(new CharEnumerator(this));
+	}
+	CharEnumeratorConst System::String::GetEnumeratorBase2() const
+	{
+		return this;
+	}
+	CharEnumerator System::String::GetEnumeratorBase2()
+	{
+		return this;
 	}
 
 	std::string String::ToStdString() const

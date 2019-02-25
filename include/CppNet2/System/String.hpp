@@ -18,9 +18,38 @@
 
 namespace CppNet2::System
 {
+	class CharEnumeratorConst;
+	class CharEnumerator;
+}
+
+namespace CppNet2::Details::System
+{
+	struct CPPNET2_EXPORT StringBase1 : CppNet2::System::Collections::Generic::IEnumerable<CppNet2::System::Char>
+	{
+	protected:
+		virtual std::unique_ptr<CppNet2::System::Collections::Generic::IEnumeratorConst<CppNet2::System::Char>> GetEnumeratorBase1() const = 0;
+		virtual std::unique_ptr<CppNet2::System::Collections::Generic::IEnumerator<CppNet2::System::Char>> GetEnumeratorBase1() = 0;
+
+	private:
+		virtual std::unique_ptr<CppNet2::System::Collections::Generic::IEnumeratorConst<CppNet2::System::Char>> GetEnumerator() const override;
+		virtual std::unique_ptr<CppNet2::System::Collections::Generic::IEnumerator<CppNet2::System::Char>> GetEnumerator() override;
+	};
+
+	struct CPPNET2_EXPORT StringBase2
+	{
+		CppNet2::System::CharEnumeratorConst GetEnumerator() const;
+		CppNet2::System::CharEnumerator GetEnumerator();
+
+	protected:
+		virtual CppNet2::System::CharEnumeratorConst GetEnumeratorBase2() const = 0;
+		virtual CppNet2::System::CharEnumerator GetEnumeratorBase2() = 0;
+	};
+}
+
+namespace CppNet2::System
+{
 	class Boolean;
 	class String;
-	class CharEnumerator;
 
 	class CPPNET2_EXPORT CharEnumeratorConst final : public Object,
 		public ICloneable, public Collections::Generic::IEnumeratorConst<Char>
@@ -94,8 +123,8 @@ namespace CppNet2::System
 		Int32 m_Index = -1;
 	};
 
-	class CPPNET2_EXPORT String : public Object,
-		public ICloneable, public IComparable<>, public IComparable<String>, public IEquatable<String>, public Collections::Generic::IEnumerable<Char>
+	class CPPNET2_EXPORT String final : public Object, public Details::System::StringBase1, public Details::System::StringBase2,
+		public ICloneable, public IComparable<>, public IComparable<String>, public IEquatable<String>
 	{
 		friend class CharEnumeratorConst;
 		friend class CharEnumerator;
@@ -150,8 +179,13 @@ namespace CppNet2::System
 		virtual Int32 CompareTo(const Object& other) const override;
 		virtual Boolean Equals(const String& other) const override;
 		virtual Boolean Equals(const Object& other) const override;
-		virtual std::unique_ptr<Collections::Generic::IEnumeratorConst<Char>> GetEnumerator() const override;
-		virtual std::unique_ptr<Collections::Generic::IEnumerator<Char>> GetEnumerator() override;
+		using Details::System::StringBase2::GetEnumerator;
+
+	protected:
+		virtual std::unique_ptr<CppNet2::System::Collections::Generic::IEnumeratorConst<CppNet2::System::Char>> GetEnumeratorBase1() const override;
+		virtual std::unique_ptr<CppNet2::System::Collections::Generic::IEnumerator<CppNet2::System::Char>> GetEnumeratorBase1() override;
+		virtual CharEnumeratorConst GetEnumeratorBase2() const override;
+		virtual CharEnumerator GetEnumeratorBase2() override;
 
 	public:
 		std::string ToStdString() const;
