@@ -8,6 +8,7 @@
 #include <CppNet2/System/IEquatable.hpp>
 #include <CppNet2/System/Int32.hpp>
 #include <CppNet2/System/Object.hpp>
+#include <CppNet2/System/Collections/Generic/IEnumerable.hpp>
 
 #include <cstddef>
 #include <istream>
@@ -17,10 +18,87 @@
 namespace CppNet2::System
 {
 	class Boolean;
+	class String;
+	class CharEnumerator;
+
+	class CPPNET2_EXPORT CharEnumeratorConst final : public Object,
+		public ICloneable, public Collections::Generic::IEnumeratorConst<Char>
+	{
+		friend class String;
+		
+	public:
+		CharEnumeratorConst(const CharEnumerator& enumerator) noexcept;
+		CharEnumeratorConst(const CharEnumeratorConst& enumerator) noexcept;
+		virtual ~CharEnumeratorConst() override = default;
+
+	private:
+		CharEnumeratorConst(const String* string) noexcept;
+
+	public:
+		CharEnumeratorConst& operator=(const CharEnumeratorConst& enumerator) noexcept;
+		CPPNET2_EXPORT friend Boolean operator==(const CharEnumerator& lhs, const CharEnumeratorConst& rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator==(const CharEnumeratorConst& lhs, const CharEnumerator& rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator==(const CharEnumeratorConst& lhs, const CharEnumeratorConst& rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator!=(const CharEnumerator& lhs, const CharEnumeratorConst& rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator!=(const CharEnumeratorConst& lhs, const CharEnumerator& rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator!=(const CharEnumeratorConst& lhs, const CharEnumeratorConst& rhs) noexcept;
+
+	public:
+		virtual Object* Clone() const override;
+		virtual void Dispose() override;
+		virtual Boolean MoveNext() override;
+		virtual void Reset() override;
+
+		virtual const Char& Current() const override;
+
+	private:
+		const String* m_String = nullptr;
+		Int32 m_Index = -1;
+	};
+
+	class CPPNET2_EXPORT CharEnumerator final : public Object,
+		public ICloneable, public Collections::Generic::IEnumerator<Char>
+	{
+		friend class String;
+		friend class CharEnumeratorConst;
+
+		friend Boolean operator==(const CharEnumerator& lhs, const CharEnumeratorConst& rhs) noexcept;
+		friend Boolean operator==(const CharEnumeratorConst& lhs, const CharEnumerator& rhs) noexcept;
+		friend Boolean operator!=(const CharEnumerator& lhs, const CharEnumeratorConst& rhs) noexcept;
+		friend Boolean operator!=(const CharEnumeratorConst& lhs, const CharEnumerator& rhs) noexcept;
+
+	public:
+		CharEnumerator(const CharEnumerator& enumerator) noexcept;
+		virtual ~CharEnumerator() override = default;
+
+	private:
+		CharEnumerator(String* string) noexcept;
+
+	public:
+		CharEnumerator& operator=(const CharEnumerator& enumerator) noexcept;
+		CPPNET2_EXPORT friend Boolean operator==(const CharEnumerator& lhs, const CharEnumerator& rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator!=(const CharEnumerator& lhs, const CharEnumerator& rhs) noexcept;
+
+	public:
+		virtual Object* Clone() const override;
+		virtual void Dispose() override;
+		virtual Boolean MoveNext() override;
+		virtual void Reset() override;
+
+		virtual const Char& Current() const override;
+		virtual Char& Current() override;
+
+	private:
+		String* m_String = nullptr;
+		Int32 m_Index = -1;
+	};
 
 	class CPPNET2_EXPORT String : public Object,
-		public ICloneable, public IComparable<>, public IComparable<String>, public IEquatable<String>
+		public ICloneable, public IComparable<>, public IComparable<String>, public IEquatable<String>, public Collections::Generic::IEnumerable<Char>
 	{
+		friend class CharEnumeratorConst;
+		friend class CharEnumerator;
+
 		CPPNET2_EXPORT friend std::ostream& operator<<(std::ostream& stream, const String& string);
 		CPPNET2_EXPORT friend std::istream& operator>>(std::istream& stream, String& string);
 		CPPNET2_EXPORT friend std::wostream& operator<<(std::wostream& stream, const String& string);
@@ -53,7 +131,7 @@ namespace CppNet2::System
 	public:
 		String& operator=(const String& string);
 		String& operator=(String&& string) noexcept;
-		Char operator[](Int32 index) const;
+		const Char& operator[](Int32 index) const;
 		Char& operator[](Int32 index);
 		CPPNET2_EXPORT friend Boolean operator==(const String& lhs, const String& rhs) noexcept;
 		CPPNET2_EXPORT friend Boolean operator!=(const String& lhs, const String& rhs) noexcept;
@@ -71,6 +149,8 @@ namespace CppNet2::System
 		virtual Int32 CompareTo(const Object& other) const override;
 		virtual Boolean Equals(const String& other) const override;
 		virtual Boolean Equals(const Object& other) const override;
+		virtual Collections::Generic::IEnumeratorConst<Char>* GetEnumerator() const override;
+		virtual Collections::Generic::IEnumerator<Char>* GetEnumerator() override;
 
 	public:
 		std::string ToStdString() const;

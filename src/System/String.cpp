@@ -12,6 +12,133 @@
 
 namespace CppNet2::System
 {
+	CharEnumeratorConst::CharEnumeratorConst(const CharEnumerator& enumerator) noexcept
+		: m_String(enumerator.m_String), m_Index(enumerator.m_Index)
+	{}
+	CharEnumeratorConst::CharEnumeratorConst(const CharEnumeratorConst& enumerator) noexcept
+		: m_String(enumerator.m_String), m_Index(enumerator.m_Index)
+	{}
+
+	CharEnumeratorConst::CharEnumeratorConst(const String* string) noexcept
+		: m_String(string)
+	{}
+
+	CharEnumeratorConst& CharEnumeratorConst::operator=(const CharEnumeratorConst& enumerator) noexcept
+	{
+		m_String = enumerator.m_String;
+		m_Index = enumerator.m_Index;
+
+		return *this;
+	}
+
+	Boolean operator==(const CharEnumerator& lhs, const CharEnumeratorConst& rhs) noexcept
+	{
+		return lhs.m_String == rhs.m_String && lhs.m_Index == rhs.m_Index;
+	}
+	Boolean operator==(const CharEnumeratorConst& lhs, const CharEnumerator& rhs) noexcept
+	{
+		return lhs.m_String == rhs.m_String && lhs.m_Index == rhs.m_Index;
+	}
+	Boolean operator==(const CharEnumeratorConst& lhs, const CharEnumeratorConst& rhs) noexcept
+	{
+		return lhs.m_String == rhs.m_String && lhs.m_Index == rhs.m_Index;
+	}
+	Boolean operator!=(const CharEnumerator& lhs, const CharEnumeratorConst& rhs) noexcept
+	{
+		return lhs.m_String != rhs.m_String || lhs.m_Index != rhs.m_Index;
+	}
+	Boolean operator!=(const CharEnumeratorConst& lhs, const CharEnumerator& rhs) noexcept
+	{
+		return lhs.m_String != rhs.m_String || lhs.m_Index != rhs.m_Index;
+	}
+	Boolean operator!=(const CharEnumeratorConst& lhs, const CharEnumeratorConst& rhs) noexcept
+	{
+		return lhs.m_String != rhs.m_String || lhs.m_Index != rhs.m_Index;
+	}
+
+	Object* CharEnumeratorConst::Clone() const
+	{
+		return new CharEnumeratorConst(*this);
+	}
+	void CharEnumeratorConst::Dispose()
+	{
+		m_String = nullptr;
+		m_Index = -1;
+	}
+	Boolean CharEnumeratorConst::MoveNext()
+	{
+		if (m_String && m_Index < m_String->Length() - 1) return ++m_Index, true;
+		else return false;
+	}
+	void CharEnumeratorConst::Reset()
+	{
+		m_Index = -1;
+	}
+
+	const Char& CharEnumeratorConst::Current() const
+	{
+		return (*m_String)[m_Index];
+	}
+}
+
+namespace CppNet2::System
+{
+	CharEnumerator::CharEnumerator(const CharEnumerator& enumerator) noexcept
+		: m_String(enumerator.m_String), m_Index(enumerator.m_Index)
+	{}
+
+	CharEnumerator::CharEnumerator(String* string) noexcept
+		: m_String(string)
+	{}
+
+	CharEnumerator& CharEnumerator::operator=(const CharEnumerator& enumerator) noexcept
+	{
+		m_String = enumerator.m_String;
+		m_Index = enumerator.m_Index;
+
+		return *this;
+	}
+	
+	Boolean operator==(const CharEnumerator& lhs, const CharEnumerator& rhs) noexcept
+	{
+		return lhs.m_String == rhs.m_String && lhs.m_Index == rhs.m_Index;
+	}
+	Boolean operator!=(const CharEnumerator& lhs, const CharEnumerator& rhs) noexcept
+	{
+		return lhs.m_String != rhs.m_String || lhs.m_Index != rhs.m_Index;
+	}
+
+	Object* CharEnumerator::Clone() const
+	{
+		return new CharEnumerator(*this);
+	}
+	void CharEnumerator::Dispose()
+	{
+		m_String = nullptr;
+		m_Index = -1;
+	}
+	Boolean CharEnumerator::MoveNext()
+	{
+		if (m_String&& m_Index < m_String->Length() - 1) return ++m_Index, true;
+		else return false;
+	}
+	void CharEnumerator::Reset()
+	{
+		m_Index = -1;
+	}
+
+	const Char& CharEnumerator::Current() const
+	{
+		return (*m_String)[m_Index];
+	}
+	Char& CharEnumerator::Current()
+	{
+		return (*m_String)[m_Index];
+	}
+}
+
+namespace CppNet2::System
+{
 	String::String(const char* string)
 		: String(string, static_cast<Int32>(std::strlen(string)))
 	{}
@@ -91,7 +218,7 @@ namespace CppNet2::System
 	{
 		return m_String = std::move(string.m_String), *this;
 	}
-	Char String::operator[](Int32 index) const
+	const Char& String::operator[](Int32 index) const
 	{
 		if (index < 0 || index >= Length()) throw std::out_of_range("");
 
@@ -172,6 +299,14 @@ namespace CppNet2::System
 		if (const String* other_string = dynamic_cast<const String*>(&other);
 			other_string) return Equals(*other_string);
 		else return false;
+	}
+	Collections::Generic::IEnumeratorConst<Char>* String::GetEnumerator() const
+	{
+		return new CharEnumeratorConst(this);
+	}
+	Collections::Generic::IEnumerator<Char>* String::GetEnumerator()
+	{
+		return new CharEnumerator(this);
 	}
 
 	std::string String::ToStdString() const
