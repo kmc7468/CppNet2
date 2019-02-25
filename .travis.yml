@@ -2,18 +2,18 @@ language: cpp
 compiler: gcc
 
 addons:
-	apt:
-		sources:
-			- ubuntu-toolchain-r-test
-		packages:
-			- gcc-7
-			- g++-7
+    apt:
+        sources:
+            - ubuntu-toolchain-r-test
+        packages:
+            - gcc-7
+            - g++-7
 
 before_script:
-	- mkdir -p build
-	- cd build
+    - mkdir -p build
+    - cd build
 
 script:
-	- cmake ..
-	- make
-	- cd ..
+    - cmake ..
+    - make
+    - cd ..
