@@ -95,12 +95,37 @@ namespace CppNet2::System
 		static const Double PositiveInfinity;
 	};
 
+#ifdef CPPNET2_INTERNAL
 	inline const Double Double::Epsilon = std::numeric_limits<double>::epsilon();
 	inline const Double Double::MaxValue = std::numeric_limits<double>::max();
 	inline const Double Double::MinValue = std::numeric_limits<double>::min();
 	inline const Double Double::NaN = std::numeric_limits<double>::quiet_NaN();
 	inline const Double Double::NegativeInfinity = -std::numeric_limits<double>::infinity();
 	inline const Double Double::PositiveInfinity = std::numeric_limits<double>::infinity();
+#endif
+
+	CPPNET2_EXPORT Boolean operator==(const Int32& lhs, const Double& rhs) noexcept;
+	CPPNET2_EXPORT Boolean operator==(const Double& lhs, const Int32& rhs) noexcept;
+	CPPNET2_EXPORT Boolean operator!=(const Int32& lhs, const Double& rhs) noexcept;
+	CPPNET2_EXPORT Boolean operator!=(const Double& lhs, const Int32& rhs) noexcept;
+	CPPNET2_EXPORT Boolean operator>(const Int32& lhs, const Double& rhs) noexcept;
+	CPPNET2_EXPORT Boolean operator>(const Double& lhs, const Int32& rhs) noexcept;
+	CPPNET2_EXPORT Boolean operator>=(const Int32& lhs, const Double& rhs) noexcept;
+	CPPNET2_EXPORT Boolean operator>=(const Double& lhs, const Int32& rhs) noexcept;
+	CPPNET2_EXPORT Boolean operator<(const Int32& lhs, const Double& rhs) noexcept;
+	CPPNET2_EXPORT Boolean operator<(const Double& lhs, const Int32& rhs) noexcept;
+	CPPNET2_EXPORT Boolean operator<=(const Int32& lhs, const Double& rhs) noexcept;
+	CPPNET2_EXPORT Boolean operator<=(const Double& lhs, const Int32& rhs) noexcept;
+	CPPNET2_EXPORT Double operator+(const Int32& lhs, const Double& rhs) noexcept;
+	CPPNET2_EXPORT Double operator+(const Double& lhs, const Int32& rhs) noexcept;
+	CPPNET2_EXPORT Double operator-(const Int32& lhs, const Double& rhs) noexcept;
+	CPPNET2_EXPORT Double operator-(const Double& lhs, const Int32& rhs) noexcept;
+	CPPNET2_EXPORT Double operator*(const Int32& lhs, const Double& rhs) noexcept;
+	CPPNET2_EXPORT Double operator*(const Double& lhs, const Int32& rhs) noexcept;
+	CPPNET2_EXPORT Double operator/(const Int32& lhs, const Double& rhs) noexcept;
+	CPPNET2_EXPORT Double operator/(const Double& lhs, const Int32& rhs) noexcept;
+	CPPNET2_EXPORT Double operator%(const Int32& lhs, const Double& rhs) noexcept;
+	CPPNET2_EXPORT Double operator%(const Double& lhs, const Int32& rhs) noexcept;
 }
 
 #endif

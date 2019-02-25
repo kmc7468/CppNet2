@@ -63,8 +63,10 @@ namespace CppNet2::System
 		static const String FalseString;
 	};
 
+#ifdef CPPNET2_INTERNAL
 	inline const String Boolean::TrueString = u"True";
 	inline const String Boolean::FalseString = u"False";
+#endif
 }
 
 #endif

@@ -7,9 +7,14 @@
 
 #include <algorithm>
 #include <codecvt>
+#include <cstdint>
 #include <cstring>
 #include <stdexcept>
 #include <utility>
+
+#if defined(_MSC_VER) && defined(CPPNET2_DISABLE_SOME_WARNINGS)
+#	pragma warning(disable: 4996)
+#endif
 
 namespace CppNet2::Details::System
 {
@@ -165,7 +170,7 @@ namespace CppNet2::System
 namespace CppNet2::System
 {
 	String::String(const char* string)
-		: String(string, static_cast<Int32>(std::strlen(string)))
+		: String(string, static_cast<std::int32_t>(std::strlen(string)))
 	{}
 	String::String(const char* string, Int32 length)
 	{
@@ -175,7 +180,7 @@ namespace CppNet2::System
 		: String(string + offset, length)
 	{}
 	String::String(const wchar_t* string)
-		: String(string, static_cast<Int32>(std::wcslen(string)))
+		: String(string, static_cast<std::int32_t>(std::wcslen(string)))
 	{}
 	String::String(const wchar_t* string, Int32 length)
 	{
@@ -287,7 +292,7 @@ namespace CppNet2::System
 	Int32 String::GetHashCode() const
 	{
 		const std::u16string temp = ToStdU16String();
-		return Details::Hash32(reinterpret_cast<const char*>(temp.c_str()), temp.size() * 2);
+		return Details::Hash32(reinterpret_cast<const char*>(temp.c_str()), static_cast<std::int32_t>(temp.size() * 2));
 	}
 	String String::ToString() const
 	{
@@ -380,7 +385,7 @@ namespace CppNet2::System
 
 	Int32 String::Length() const noexcept
 	{
-		return static_cast<Int32>(m_String.size());
+		return static_cast<std::int32_t>(m_String.size());
 	}
 
 	std::ostream& operator<<(std::ostream& stream, const String& string)
@@ -411,14 +416,14 @@ namespace CppNet2::Literals::StringLiterals
 {
 	System::String operator""_s(const char* string, std::size_t size)
 	{
-		return System::String(string, static_cast<System::Int32>(size));
+		return System::String(string, static_cast<std::int32_t>(size));
 	}
 	System::String operator""_s(const wchar_t* string, std::size_t size)
 	{
-		return System::String(string, static_cast<System::Int32>(size));
+		return System::String(string, static_cast<std::int32_t>(size));
 	}
 	System::String operator""_s(const char16_t* string, std::size_t size)
 	{
-		return System::String(string, static_cast<System::Int32>(size));
+		return System::String(string, static_cast<std::int32_t>(size));
 	}
 }

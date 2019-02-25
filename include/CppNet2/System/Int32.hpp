@@ -120,8 +120,10 @@ namespace CppNet2::System
 		static const Int32 MinValue;
 	};
 
+#ifdef CPPNET2_INTERNAL
 	inline const Int32 Int32::MaxValue = std::numeric_limits<std::int32_t>::max();
 	inline const Int32 Int32::MinValue = std::numeric_limits<std::int32_t>::min();
+#endif
 }
 
 #endif

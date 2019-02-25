@@ -254,4 +254,93 @@ namespace CppNet2::System
 			other_double) return Equals(*other_double);
 		else return false;
 	}
+
+	Boolean operator==(const Int32& lhs, const Double& rhs) noexcept
+	{
+		return static_cast<Double>(lhs) == rhs;
+	}
+	Boolean operator==(const Double& lhs, const Int32& rhs) noexcept
+	{
+		return lhs == static_cast<Double>(rhs);
+	}
+	Boolean operator!=(const Int32& lhs, const Double& rhs) noexcept
+	{
+		return static_cast<Double>(lhs) != rhs;
+	}
+	Boolean operator!=(const Double& lhs, const Int32& rhs) noexcept
+	{
+		return lhs != static_cast<Double>(rhs);
+	}
+	Boolean operator>(const Int32& lhs, const Double& rhs) noexcept
+	{
+		return static_cast<Double>(lhs) > rhs;
+	}
+	Boolean operator>(const Double& lhs, const Int32& rhs) noexcept
+	{
+		return lhs > static_cast<Double>(rhs);
+	}
+	Boolean operator>=(const Int32& lhs, const Double& rhs) noexcept
+	{
+		return static_cast<Double>(lhs) >= rhs;
+	}
+	Boolean operator>=(const Double& lhs, const Int32& rhs) noexcept
+	{
+		return lhs >= static_cast<Double>(rhs);
+	}
+	Boolean operator<(const Int32& lhs, const Double& rhs) noexcept
+	{
+		return static_cast<Double>(lhs) < rhs;
+	}
+	Boolean operator<(const Double& lhs, const Int32& rhs) noexcept
+	{
+		return lhs < static_cast<Double>(rhs);
+	}
+	Boolean operator<=(const Int32& lhs, const Double& rhs) noexcept
+	{
+		return static_cast<Double>(lhs) <= rhs;
+	}
+	Boolean operator<=(const Double& lhs, const Int32& rhs) noexcept
+	{
+		return lhs <= static_cast<Double>(rhs);
+	}
+	Double operator+(const Int32& lhs, const Double& rhs) noexcept
+	{
+		return static_cast<Double>(lhs) + rhs;
+	}
+	Double operator+(const Double& lhs, const Int32& rhs) noexcept
+	{
+		return lhs + static_cast<Double>(rhs);
+	}
+	Double operator-(const Int32& lhs, const Double& rhs) noexcept
+	{
+		return static_cast<Double>(lhs) - rhs;
+	}
+	Double operator-(const Double& lhs, const Int32& rhs) noexcept
+	{
+		return lhs - static_cast<Double>(rhs);
+	}
+	Double operator*(const Int32& lhs, const Double& rhs) noexcept
+	{
+		return static_cast<Double>(lhs) * rhs;
+	}
+	Double operator*(const Double& lhs, const Int32& rhs) noexcept
+	{
+		return lhs * static_cast<Double>(rhs);
+	}
+	Double operator/(const Int32& lhs, const Double& rhs) noexcept
+	{
+		return static_cast<Double>(lhs) / rhs;
+	}
+	Double operator/(const Double& lhs, const Int32& rhs) noexcept
+	{
+		return lhs / static_cast<Double>(rhs);
+	}
+	Double operator%(const Int32& lhs, const Double& rhs) noexcept
+	{
+		return static_cast<Double>(lhs) % rhs;
+	}
+	Double operator%(const Double& lhs, const Int32& rhs) noexcept
+	{
+		return lhs % static_cast<Double>(rhs);
+	}
 }

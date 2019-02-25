@@ -117,8 +117,10 @@ namespace CppNet2::System
 		static const Char MinValue;
 	};
 
+#ifdef CPPNET2_INTERNAL
 	inline const Char Char::MaxValue = std::numeric_limits<char16_t>::max();
 	inline const Char Char::MinValue = std::numeric_limits<char16_t>::min();
+#endif
 }
 
 #endif

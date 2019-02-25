@@ -16,6 +16,10 @@
 #include <ostream>
 #include <string>
 
+#if defined(_MSC_VER) && defined(CPPNET2_DISABLE_SOME_WARNINGS)
+#	pragma warning(disable: 4251)
+#endif
+
 namespace CppNet2::System
 {
 	class CharEnumeratorConst;
@@ -92,10 +96,10 @@ namespace CppNet2::System
 		friend class String;
 		friend class CharEnumeratorConst;
 
-		friend Boolean operator==(const CharEnumerator& lhs, const CharEnumeratorConst& rhs) noexcept;
-		friend Boolean operator==(const CharEnumeratorConst& lhs, const CharEnumerator& rhs) noexcept;
-		friend Boolean operator!=(const CharEnumerator& lhs, const CharEnumeratorConst& rhs) noexcept;
-		friend Boolean operator!=(const CharEnumeratorConst& lhs, const CharEnumerator& rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator==(const CharEnumerator& lhs, const CharEnumeratorConst& rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator==(const CharEnumeratorConst& lhs, const CharEnumerator& rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator!=(const CharEnumerator& lhs, const CharEnumeratorConst& rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator!=(const CharEnumeratorConst& lhs, const CharEnumerator& rhs) noexcept;
 
 	public:
 		CharEnumerator(const CharEnumerator& enumerator) noexcept;
@@ -205,12 +209,14 @@ namespace CppNet2::System
 		static const String Empty;
 	};
 
+#ifdef CPPNET2_INTERNAL
 	inline const String String::Empty;
+#endif
 
-	std::ostream& operator<<(std::ostream& stream, const String& string);
-	std::istream& operator>>(std::istream& stream, String& string);
-	std::wostream& operator<<(std::wostream& stream, const String& string);
-	std::wistream& operator>>(std::wistream& stream, String& string);
+	CPPNET2_EXPORT std::ostream& operator<<(std::ostream& stream, const String& string);
+	CPPNET2_EXPORT std::istream& operator>>(std::istream& stream, String& string);
+	CPPNET2_EXPORT std::wostream& operator<<(std::wostream& stream, const String& string);
+	CPPNET2_EXPORT std::wistream& operator>>(std::wistream& stream, String& string);
 }
 
 namespace CppNet2

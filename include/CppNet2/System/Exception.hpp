@@ -8,6 +8,10 @@
 
 #include <exception>
 
+#if defined(_MSC_VER) && defined(CPPNET2_DISABLE_SOME_WARNINGS)
+#	pragma warning(disable: 4275)
+#endif
+
 namespace CppNet2::System
 {
 	class Exception;
