@@ -23,6 +23,18 @@ namespace CppNet2::Details::System
 		return *this;
 	}
 
+	CppNet2::System::String ExceptionBase::ToString() const
+	{
+		CppNet2::System::String result = u"CppNet2::System::Exception";
+		if (m_Message.Length())
+		{
+			result += u": ";
+			result += m_Message;
+		}
+
+		return result;
+	}
+
 	const char* ExceptionBase::what() const
 	{
 		return "CppNet2::System::Exception";

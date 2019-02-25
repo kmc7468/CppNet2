@@ -2,6 +2,7 @@
 #define CPPNET2_HEADER_SYSTEM_EXCEPTION_HPP
 #include <CppNet2/Config.hpp>
 
+#include <CppNet2/System/Boolean.hpp>
 #include <CppNet2/System/Object.hpp>
 #include <CppNet2/System/String.hpp>
 
@@ -27,11 +28,14 @@ namespace CppNet2::Details::System
 		ExceptionBase& operator=(const std::exception& exception);
 		ExceptionBase& operator=(const ExceptionBase& exception);
 
+	public:
+		virtual CppNet2::System::String ToString() const override;
+
 	private:
 		virtual const char* what() const override;
 
 	public:
-		virtual CppNet2::System::String Message() const; 
+		virtual CppNet2::System::String Message() const;
 
 	private:
 		CppNet2::System::String m_Message;
