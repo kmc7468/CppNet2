@@ -1,0 +1,1 @@
+#include <CppNet2/System/Collections/Generic.hpp>
