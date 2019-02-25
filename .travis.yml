@@ -14,6 +14,8 @@ before_script:
     - cd build
 
 script:
+    - export CC=gcc-7
+    - export CXX=g++7
     - cmake ..
     - make
     - cd ..
