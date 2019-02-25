@@ -1,12 +1,13 @@
 #include <CppNet2/System/String.hpp>
 
+#include <CppNet2/Details/Hash32.hpp>
+#include <CppNet2/Details/Sign.hpp>
 #include <CppNet2/System/ArgumentException.hpp>
 #include <CppNet2/System/Boolean.hpp>
 
 #include <algorithm>
 #include <codecvt>
 #include <cstring>
-#include <functional>
 #include <stdexcept>
 #include <utility>
 
@@ -285,8 +286,8 @@ namespace CppNet2::System
 
 	Int32 String::GetHashCode() const
 	{
-		const std::u16string temp(m_String.begin(), m_String.end());
-		return static_cast<Int32>(std::hash<std::u16string>()(temp));
+		const std::u16string temp = ToStdU16String();
+		return Details::Hash32(reinterpret_cast<const char*>(temp.c_str()), temp.size() * 2);
 	}
 	String String::ToString() const
 	{
@@ -303,7 +304,7 @@ namespace CppNet2::System
 		for (Int32 i = 0; i < min_length; ++i)
 		{
 			if (const Int32 compared = static_cast<Int32>((*this)[i]) - static_cast<Int32>(other[i]);
-				compared) return compared;
+				compared) return Details::Sign(compared);
 		}
 
 		return Length() > other.Length() ? 1 : (Length() < other.Length() ? -1 : 0);

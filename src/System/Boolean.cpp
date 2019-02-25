@@ -1,5 +1,7 @@
 #include <CppNet2/System/Boolean.hpp>
 
+#include <CppNet2/Details/Hash32.hpp>
+#include <CppNet2/Details/Sign.hpp>
 #include <CppNet2/System/ArgumentException.hpp>
 #include <CppNet2/System/Boolean.hpp>
 #include <CppNet2/System/Int32.hpp>
@@ -116,7 +118,7 @@ namespace CppNet2::System
 
 	Int32 Boolean::GetHashCode() const
 	{
-		return m_Value;
+		return Details::Hash32(m_Value);
 	}
 	String Boolean::ToString() const
 	{
@@ -124,7 +126,7 @@ namespace CppNet2::System
 	}
 	Int32 Boolean::CompareTo(const Boolean& other) const
 	{
-		return static_cast<int>(m_Value) - other.m_Value;
+		return Details::Sign(static_cast<int>(m_Value) - other.m_Value);
 	}
 	Int32 Boolean::CompareTo(const Object& other) const
 	{

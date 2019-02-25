@@ -1,11 +1,9 @@
 #include <CppNet2/System/Object.hpp>
 
+#include <CppNet2/Details/Hash32.hpp>
 #include <CppNet2/System/Boolean.hpp>
 #include <CppNet2/System/Int32.hpp>
 #include <CppNet2/System/String.hpp>
-
-#include <cstdint>
-#include <functional>
 
 namespace CppNet2::System
 {
@@ -15,7 +13,7 @@ namespace CppNet2::System
 	}
 	Int32 Object::GetHashCode() const
 	{
-		return static_cast<std::int32_t>(std::hash<std::uintptr_t>()(reinterpret_cast<std::uintptr_t>(this)));
+		return Details::Hash32(this);
 	}
 	String Object::ToString() const
 	{
