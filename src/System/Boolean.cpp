@@ -1,8 +1,8 @@
 #include <CppNet2/System/Boolean.hpp>
 
+#include <CppNet2/System/ArgumentException.hpp>
+#include <CppNet2/System/Boolean.hpp>
 #include <CppNet2/System/Int32.hpp>
-
-#include <typeinfo>
 
 namespace CppNet2::System
 {
@@ -130,7 +130,7 @@ namespace CppNet2::System
 	{
 		if (const Boolean* const other_boolean = dynamic_cast<const Boolean*>(&other);
 			other_boolean) return CompareTo(*other_boolean);
-		throw std::bad_cast();
+		throw ArgumentException(u"Object must be of type CppNet2::System::Boolean.", u"other");
 	}
 	Boolean Boolean::Equals(const Boolean& other) const
 	{

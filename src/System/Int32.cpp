@@ -1,9 +1,8 @@
 #include <CppNet2/System/Int32.hpp>
 
+#include <CppNet2/System/ArgumentException.hpp>
 #include <CppNet2/System/Boolean.hpp>
 #include <CppNet2/System/String.hpp>
-
-#include <typeinfo>
 
 namespace CppNet2::System
 {
@@ -345,7 +344,7 @@ namespace CppNet2::System
 	{
 		if (const Int32* const other_int32 = dynamic_cast<const Int32*>(&other);
 			other_int32) return CompareTo(*other_int32);
-		throw std::bad_cast();
+		throw ArgumentException(u"Object must be of type CppNet2::System::Int32.", u"other");
 	}
 	Boolean Int32::Equals(const Int32& other) const
 	{

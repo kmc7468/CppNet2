@@ -1,11 +1,11 @@
 #include <CppNet2/System/String.hpp>
 
+#include <CppNet2/System/ArgumentException.hpp>
 #include <CppNet2/System/Boolean.hpp>
 
 #include <algorithm>
 #include <functional>
 #include <stdexcept>
-#include <typeinfo>
 #include <utility>
 
 namespace CppNet2::System
@@ -127,7 +127,7 @@ namespace CppNet2::System
 	{
 		if (const String* other_string = dynamic_cast<const String*>(&other);
 			other_string) return CompareTo(*other_string);
-		throw std::bad_cast();
+		throw ArgumentException(u"Object must be of type CppNet2::System::String.", u"other");
 	}
 	Boolean String::Equals(const String& other) const
 	{
