@@ -12,6 +12,7 @@
 
 #include <cstddef>
 #include <istream>
+#include <memory>
 #include <ostream>
 #include <string>
 
@@ -44,7 +45,7 @@ namespace CppNet2::System
 		CPPNET2_EXPORT friend Boolean operator!=(const CharEnumeratorConst& lhs, const CharEnumeratorConst& rhs) noexcept;
 
 	public:
-		virtual Object* Clone() const override;
+		virtual std::unique_ptr<Object> Clone() const override;
 		virtual void Dispose() override;
 		virtual Boolean MoveNext() override;
 		virtual void Reset() override;
@@ -78,9 +79,9 @@ namespace CppNet2::System
 		CharEnumerator& operator=(const CharEnumerator& enumerator) noexcept;
 		CPPNET2_EXPORT friend Boolean operator==(const CharEnumerator& lhs, const CharEnumerator& rhs) noexcept;
 		CPPNET2_EXPORT friend Boolean operator!=(const CharEnumerator& lhs, const CharEnumerator& rhs) noexcept;
-
+		
 	public:
-		virtual Object* Clone() const override;
+		virtual std::unique_ptr<Object> Clone() const override;
 		virtual void Dispose() override;
 		virtual Boolean MoveNext() override;
 		virtual void Reset() override;
@@ -144,13 +145,13 @@ namespace CppNet2::System
 	public:
 		virtual Int32 GetHashCode() const override;
 		virtual String ToString() const override;
-		virtual Object* Clone() const override;
+		virtual std::unique_ptr<Object> Clone() const override;
 		virtual Int32 CompareTo(const String& other) const override;
 		virtual Int32 CompareTo(const Object& other) const override;
 		virtual Boolean Equals(const String& other) const override;
 		virtual Boolean Equals(const Object& other) const override;
-		virtual Collections::Generic::IEnumeratorConst<Char>* GetEnumerator() const override;
-		virtual Collections::Generic::IEnumerator<Char>* GetEnumerator() override;
+		virtual std::unique_ptr<Collections::Generic::IEnumeratorConst<Char>> GetEnumerator() const override;
+		virtual std::unique_ptr<Collections::Generic::IEnumerator<Char>> GetEnumerator() override;
 
 	public:
 		std::string ToStdString() const;

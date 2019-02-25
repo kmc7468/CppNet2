@@ -56,9 +56,9 @@ namespace CppNet2::System
 		return lhs.m_String != rhs.m_String || lhs.m_Index != rhs.m_Index;
 	}
 
-	Object* CharEnumeratorConst::Clone() const
+	std::unique_ptr<Object> CharEnumeratorConst::Clone() const
 	{
-		return new CharEnumeratorConst(*this);
+		return std::unique_ptr<Object>(new CharEnumeratorConst(*this));
 	}
 	void CharEnumeratorConst::Dispose()
 	{
@@ -108,9 +108,9 @@ namespace CppNet2::System
 		return lhs.m_String != rhs.m_String || lhs.m_Index != rhs.m_Index;
 	}
 
-	Object* CharEnumerator::Clone() const
+	std::unique_ptr<Object> CharEnumerator::Clone() const
 	{
-		return new CharEnumerator(*this);
+		return std::unique_ptr<Object>(new CharEnumerator(*this));
 	}
 	void CharEnumerator::Dispose()
 	{
@@ -268,9 +268,9 @@ namespace CppNet2::System
 	{
 		return m_String;
 	}
-	Object* String::Clone() const
+	std::unique_ptr<Object> String::Clone() const
 	{
-		return new String(*this);
+		return std::unique_ptr<Object>(new String(*this));
 	}
 	Int32 String::CompareTo(const String& other) const
 	{
@@ -300,13 +300,13 @@ namespace CppNet2::System
 			other_string) return Equals(*other_string);
 		else return false;
 	}
-	Collections::Generic::IEnumeratorConst<Char>* String::GetEnumerator() const
+	std::unique_ptr<Collections::Generic::IEnumeratorConst<Char>> String::GetEnumerator() const
 	{
-		return new CharEnumeratorConst(this);
+		return std::unique_ptr<Collections::Generic::IEnumeratorConst<Char>>(new CharEnumeratorConst(this));
 	}
-	Collections::Generic::IEnumerator<Char>* String::GetEnumerator()
+	std::unique_ptr<Collections::Generic::IEnumerator<Char>> String::GetEnumerator()
 	{
-		return new CharEnumerator(this);
+		return std::unique_ptr<Collections::Generic::IEnumerator<Char>>(new CharEnumerator(this));
 	}
 
 	std::string String::ToStdString() const

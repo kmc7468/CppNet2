@@ -4,6 +4,8 @@
 
 #include <CppNet2/System/Collections/Generic/IEnumerator.hpp>
 
+#include <memory>
+
 namespace CppNet2::System::Collections::Generic
 {
 	template<typename T>
@@ -11,7 +13,7 @@ namespace CppNet2::System::Collections::Generic
 	{
 		virtual ~IEnumerableConst() = default;
 
-		virtual IEnumeratorConst<T>* GetEnumerator() const = 0;
+		virtual std::unique_ptr<IEnumeratorConst<T>> GetEnumerator() const = 0;
 	};
 
 	template<typename T>
@@ -19,7 +21,7 @@ namespace CppNet2::System::Collections::Generic
 	{
 		virtual ~IEnumerable() override = default;
 
-		virtual IEnumerator<T>* GetEnumerator() = 0;
+		virtual std::unique_ptr<IEnumerator<T>> GetEnumerator() = 0;
 	};
 }
 

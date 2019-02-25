@@ -4,13 +4,15 @@
 
 #include <CppNet2/System/Object.hpp>
 
+#include <memory>
+
 namespace CppNet2::System
 {
 	struct CPPNET2_EXPORT ICloneable
 	{
 		virtual ~ICloneable() = default;
 
-		virtual Object* Clone() const = 0;
+		virtual std::unique_ptr<Object> Clone() const = 0;
 	};
 }
 
