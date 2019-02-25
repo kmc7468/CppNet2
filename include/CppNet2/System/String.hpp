@@ -10,6 +10,8 @@
 #include <CppNet2/System/Object.hpp>
 
 #include <cstddef>
+#include <istream>
+#include <ostream>
 #include <string>
 
 namespace CppNet2::System
@@ -19,8 +21,19 @@ namespace CppNet2::System
 	class CPPNET2_EXPORT String : public Object,
 		public ICloneable, public IComparable<>, public IComparable<String>, public IEquatable<String>
 	{
+		CPPNET2_EXPORT friend std::ostream& operator<<(std::ostream& stream, const String& string);
+		CPPNET2_EXPORT friend std::istream& operator>>(std::istream& stream, String& string);
+		CPPNET2_EXPORT friend std::wostream& operator<<(std::wostream& stream, const String& string);
+		CPPNET2_EXPORT friend std::wistream& operator>>(std::wistream& stream, String& string);
+
 	public:
 		String() noexcept = default;
+		String(const char* string);
+		String(const char* string, Int32 length);
+		String(const char* string, Int32 offset, Int32 length);
+		String(const wchar_t* string);
+		String(const wchar_t* string, Int32 length);
+		String(const wchar_t* string, Int32 offset, Int32 length);
 		String(const char16_t* string);
 		String(const char16_t* string, Int32 length);
 		String(const char16_t* string, Int32 offset, Int32 length);
@@ -29,6 +42,9 @@ namespace CppNet2::System
 		String(const Char* string);
 		String(const Char* string, Int32 length);
 		String(const Char* string, Int32 offset, Int32 length);
+		String(const std::string& string);
+		String(const std::wstring& string);
+		String(const std::u16string& string);
 		String(std::basic_string<Char> string);
 		String(const String& string);
 		String(String&& string) noexcept;
@@ -57,6 +73,14 @@ namespace CppNet2::System
 		virtual Boolean Equals(const Object& other) const override;
 
 	public:
+		std::string ToStdString() const;
+		std::wstring ToStdWString() const;
+		std::u16string ToStdU16String() const;
+		void FromStdString(const std::string& string);
+		void FromStdWString(const std::wstring& string);
+		void FromStdU16String(const std::u16string& string);
+
+	public:
 		Int32 Length() const noexcept;
 
 	private:
@@ -67,6 +91,11 @@ namespace CppNet2::System
 	};
 
 	inline const String String::Empty;
+
+	std::ostream& operator<<(std::ostream& stream, const String& string);
+	std::istream& operator>>(std::istream& stream, String& string);
+	std::wostream& operator<<(std::wostream& stream, const String& string);
+	std::wistream& operator>>(std::wistream& stream, String& string);
 }
 
 namespace CppNet2
@@ -75,6 +104,8 @@ namespace CppNet2
 	{
 		namespace StringLiterals
 		{
+			CPPNET2_EXPORT System::String operator""_s(const char* string, std::size_t size);
+			CPPNET2_EXPORT System::String operator""_s(const wchar_t* string, std::size_t size);
 			CPPNET2_EXPORT System::String operator""_s(const char16_t* string, std::size_t size);
 		}
 	}
