@@ -36,7 +36,7 @@ namespace CppNet2::Details::System
 		virtual CppNet2::System::String ToString() const override;
 
 	private:
-		virtual const char* what() const override;
+		virtual const char* what() const noexcept override;
 
 	public:
 		virtual CppNet2::System::String Message() const;

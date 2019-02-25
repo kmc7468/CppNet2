@@ -9,6 +9,7 @@
 #include <codecvt>
 #include <cstdint>
 #include <cstring>
+#include <locale>
 #include <stdexcept>
 #include <utility>
 
@@ -348,16 +349,19 @@ namespace CppNet2::System
 		return this;
 	}
 
+	struct codecvt_wide_multi : std::codecvt<wchar_t, char, std::mbstate_t> {};
+	struct codecvt_wide_utf16 : std::codecvt_utf16<wchar_t, 0x10FFFF, std::little_endian> {};
+
 	std::string String::ToStdString() const
 	{
 		const std::wstring wstring = ToStdWString();
-		std::wstring_convert<std::codecvt<wchar_t, char, std::mbstate_t>> converter;
+		std::wstring_convert<codecvt_wide_multi> converter;
 		return converter.to_bytes(wstring);
 	}
 	std::wstring String::ToStdWString() const
 	{
 		const std::u16string u16string = ToStdU16String();
-		std::wstring_convert<std::codecvt_utf16<wchar_t, 0x10FFFF, std::little_endian>> converter;
+		std::wstring_convert<codecvt_wide_utf16> converter;
 		return converter.from_bytes(reinterpret_cast<const char*>(u16string.c_str()), reinterpret_cast<const char*>(u16string.c_str()) + u16string.size() * 2);
 	}
 	std::u16string String::ToStdU16String() const
@@ -366,12 +370,12 @@ namespace CppNet2::System
 	}
 	void String::FromStdString(const std::string& string)
 	{
-		std::wstring_convert<std::codecvt<wchar_t, char, std::mbstate_t>> converter;
+		std::wstring_convert<codecvt_wide_multi> converter;
 		FromStdWString(converter.from_bytes(string));
 	}
 	void String::FromStdWString(const std::wstring& string)
 	{
-		std::wstring_convert<std::codecvt_utf16<wchar_t, 0x10FFFFF, std::little_endian>> converter;
+		std::wstring_convert<codecvt_wide_utf16> converter;
 		const std::string converter_output = converter.to_bytes(string);
 		std::u16string converted(converter_output.size() / 2, 0);
 		std::memcpy(converted.data(), converter_output.c_str(), converter_output.size());

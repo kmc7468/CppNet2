@@ -8,10 +8,11 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(MAKE_SHARED OFF CACHE BOOL "If this option is set, CppNet2 will be compiled as a shared library.")
 
-if(${MSVC} AND ${MAKE_SHARED})
-	set(DISABLE_SOME_WARNINGS ON CACHE BOOL "If this option is set, Warnings that only occur when compiling to a shared library with MSVC will be disabled(The recommended value is true).")
-else()
-	unset(DISABLE_SOME_WARNINGS CACHE)
+unset(DISABLE_SOME_WARNINGS CACHE)
+if(${MSVC})
+	if(${MAKE_SHARED})
+		set(DISABLE_SOME_WARNINGS ON CACHE BOOL "If this option is set, Warnings that only occur when compiling to a shared library with MSVC will be disabled(The recommended value is true).")
+	endif()
 endif()
 
 include_directories("./include")

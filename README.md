@@ -44,6 +44,8 @@ $ make
 ## 테스트 된 컴파일러
 컴파일러 | CMake 버전 값 | 비고
 -|-|-
+g++ 7.3.0 | |
+clang++ 6.0.0 | |
 Microsoft Visual Studio 2019 | Visual Studio 16 2019 |
 Microsoft Visual Studio 2017 | Visual Studio 15 2017 | 동적 라이브러리 빌드 불가
 

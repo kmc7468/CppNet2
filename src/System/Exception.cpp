@@ -35,7 +35,7 @@ namespace CppNet2::Details::System
 		return result;
 	}
 
-	const char* ExceptionBase::what() const
+	const char* ExceptionBase::what() const noexcept
 	{
 		return "CppNet2::System::Exception";
 	}
