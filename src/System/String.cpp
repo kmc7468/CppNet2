@@ -1,5 +1,6 @@
 #include <CppNet2/System/String.hpp>
 
+#include <CppNet2/Details/Endian.hpp>
 #include <CppNet2/Details/Hash32.hpp>
 #include <CppNet2/Details/Sign.hpp>
 #include <CppNet2/System/ArgumentException.hpp>
@@ -350,7 +351,8 @@ namespace CppNet2::System
 	}
 
 	struct codecvt_wide_multi : std::codecvt<wchar_t, char, std::mbstate_t> {};
-	struct codecvt_wide_utf16 : std::codecvt_utf16<wchar_t, 0x10FFFF, std::little_endian> {};
+	struct codecvt_wide_utf16_little : std::codecvt_utf16<wchar_t, 0x10FFFF, std::little_endian> {};
+	struct codecvt_wide_utf16_big : std::codecvt_utf16<wchar_t, 0x10FFFF, std::little_endian> {};
 
 	std::string String::ToStdString() const
 	{
@@ -361,8 +363,17 @@ namespace CppNet2::System
 	std::wstring String::ToStdWString() const
 	{
 		const std::u16string u16string = ToStdU16String();
-		std::wstring_convert<codecvt_wide_utf16> converter;
-		return converter.from_bytes(reinterpret_cast<const char*>(u16string.c_str()), reinterpret_cast<const char*>(u16string.c_str()) + u16string.size() * 2);
+
+		if (Details::GetEndian() == Details::Endian::Little)
+		{
+			std::wstring_convert<codecvt_wide_utf16_little> converter;
+			return converter.from_bytes(reinterpret_cast<const char*>(u16string.c_str()), reinterpret_cast<const char*>(u16string.c_str()) + u16string.size() * 2);
+		}
+		else
+		{
+			std::wstring_convert<codecvt_wide_utf16_big> converter;
+			return converter.from_bytes(reinterpret_cast<const char*>(u16string.c_str()), reinterpret_cast<const char*>(u16string.c_str()) + u16string.size() * 2);
+		}
 	}
 	std::u16string String::ToStdU16String() const
 	{
@@ -375,12 +386,24 @@ namespace CppNet2::System
 	}
 	void String::FromStdWString(const std::wstring& string)
 	{
-		std::wstring_convert<codecvt_wide_utf16> converter;
-		const std::string converter_output = converter.to_bytes(string);
-		std::u16string converted(converter_output.size() / 2, 0);
-		std::memcpy(converted.data(), converter_output.c_str(), converter_output.size());
+		if (Details::GetEndian() == Details::Endian::Little)
+		{
+			std::wstring_convert<codecvt_wide_utf16_little> converter;
+			const std::string converter_output = converter.to_bytes(string);
+			std::u16string converted(converter_output.size() / 2, 0);
+			std::memcpy(converted.data(), converter_output.c_str(), converter_output.size());
 
-		FromStdU16String(converted);
+			FromStdU16String(converted);
+		}
+		else
+		{
+			std::wstring_convert<codecvt_wide_utf16_big> converter;
+			const std::string converter_output = converter.to_bytes(string);
+			std::u16string converted(converter_output.size() / 2, 0);
+			std::memcpy(converted.data(), converter_output.c_str(), converter_output.size());
+
+			FromStdU16String(converted);
+		}
 	}
 	void String::FromStdU16String(const std::u16string& string)
 	{
