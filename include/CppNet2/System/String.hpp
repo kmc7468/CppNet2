@@ -9,6 +9,9 @@
 #include <CppNet2/System/Int32.hpp>
 #include <CppNet2/System/Object.hpp>
 #include <CppNet2/System/Collections/Generic/IEnumerable.hpp>
+#include <CppNet2/System/Collections/Generic/IEnumerator.hpp>
+#include <CppNet2/System/Collections/Generic/IReadOnlyEnumerable.hpp>
+#include <CppNet2/System/Collections/Generic/IReadOnlyEnumerator.hpp>
 
 #include <cstddef>
 #include <istream>
@@ -22,7 +25,7 @@
 
 namespace CppNet2::System
 {
-	class CharEnumeratorConst;
+	class ReadOnlyCharEnumerator;
 	class CharEnumerator;
 }
 
@@ -31,21 +34,21 @@ namespace CppNet2::Details::System
 	struct CPPNET2_EXPORT StringBase1 : CppNet2::System::Collections::Generic::IEnumerable<CppNet2::System::Char>
 	{
 	protected:
-		virtual std::unique_ptr<CppNet2::System::Collections::Generic::IEnumeratorConst<CppNet2::System::Char>> GetEnumeratorBase1() const = 0;
+		virtual std::unique_ptr<CppNet2::System::Collections::Generic::IReadOnlyEnumerator<CppNet2::System::Char>> GetEnumeratorBase1() const = 0;
 		virtual std::unique_ptr<CppNet2::System::Collections::Generic::IEnumerator<CppNet2::System::Char>> GetEnumeratorBase1() = 0;
 
 	private:
-		virtual std::unique_ptr<CppNet2::System::Collections::Generic::IEnumeratorConst<CppNet2::System::Char>> GetEnumerator() const override;
+		virtual std::unique_ptr<CppNet2::System::Collections::Generic::IReadOnlyEnumerator<CppNet2::System::Char>> GetEnumerator() const override;
 		virtual std::unique_ptr<CppNet2::System::Collections::Generic::IEnumerator<CppNet2::System::Char>> GetEnumerator() override;
 	};
 
 	struct CPPNET2_EXPORT StringBase2
 	{
-		CppNet2::System::CharEnumeratorConst GetEnumerator() const;
+		CppNet2::System::ReadOnlyCharEnumerator GetEnumerator() const;
 		CppNet2::System::CharEnumerator GetEnumerator();
 
 	protected:
-		virtual CppNet2::System::CharEnumeratorConst GetEnumeratorBase2() const = 0;
+		virtual CppNet2::System::ReadOnlyCharEnumerator GetEnumeratorBase2() const = 0;
 		virtual CppNet2::System::CharEnumerator GetEnumeratorBase2() = 0;
 	};
 }
@@ -55,27 +58,27 @@ namespace CppNet2::System
 	class Boolean;
 	class String;
 
-	class CPPNET2_EXPORT CharEnumeratorConst final : public Object,
-		public ICloneable, public Collections::Generic::IEnumeratorConst<Char>
+	class CPPNET2_EXPORT ReadOnlyCharEnumerator final : public Object,
+		public ICloneable, public Collections::Generic::IReadOnlyEnumerator<Char>
 	{
 		friend class String;
 		
 	public:
-		CharEnumeratorConst(const CharEnumerator& enumerator) noexcept;
-		CharEnumeratorConst(const CharEnumeratorConst& enumerator) noexcept;
-		virtual ~CharEnumeratorConst() override = default;
+		ReadOnlyCharEnumerator(const CharEnumerator& enumerator) noexcept;
+		ReadOnlyCharEnumerator(const ReadOnlyCharEnumerator& enumerator) noexcept;
+		virtual ~ReadOnlyCharEnumerator() override = default;
 
 	private:
-		CharEnumeratorConst(const String* string) noexcept;
+		ReadOnlyCharEnumerator(const String* string) noexcept;
 
 	public:
-		CharEnumeratorConst& operator=(const CharEnumeratorConst& enumerator) noexcept;
-		CPPNET2_EXPORT friend Boolean operator==(const CharEnumerator& lhs, const CharEnumeratorConst& rhs) noexcept;
-		CPPNET2_EXPORT friend Boolean operator==(const CharEnumeratorConst& lhs, const CharEnumerator& rhs) noexcept;
-		CPPNET2_EXPORT friend Boolean operator==(const CharEnumeratorConst& lhs, const CharEnumeratorConst& rhs) noexcept;
-		CPPNET2_EXPORT friend Boolean operator!=(const CharEnumerator& lhs, const CharEnumeratorConst& rhs) noexcept;
-		CPPNET2_EXPORT friend Boolean operator!=(const CharEnumeratorConst& lhs, const CharEnumerator& rhs) noexcept;
-		CPPNET2_EXPORT friend Boolean operator!=(const CharEnumeratorConst& lhs, const CharEnumeratorConst& rhs) noexcept;
+		ReadOnlyCharEnumerator& operator=(const ReadOnlyCharEnumerator& enumerator) noexcept;
+		CPPNET2_EXPORT friend Boolean operator==(const CharEnumerator& lhs, const ReadOnlyCharEnumerator& rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator==(const ReadOnlyCharEnumerator& lhs, const CharEnumerator& rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator==(const ReadOnlyCharEnumerator& lhs, const ReadOnlyCharEnumerator& rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator!=(const CharEnumerator& lhs, const ReadOnlyCharEnumerator& rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator!=(const ReadOnlyCharEnumerator& lhs, const CharEnumerator& rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator!=(const ReadOnlyCharEnumerator& lhs, const ReadOnlyCharEnumerator& rhs) noexcept;
 
 	public:
 		virtual std::unique_ptr<Object> Clone() const override;
@@ -94,12 +97,12 @@ namespace CppNet2::System
 		public ICloneable, public Collections::Generic::IEnumerator<Char>
 	{
 		friend class String;
-		friend class CharEnumeratorConst;
+		friend class ReadOnlyCharEnumerator;
 
-		CPPNET2_EXPORT friend Boolean operator==(const CharEnumerator& lhs, const CharEnumeratorConst& rhs) noexcept;
-		CPPNET2_EXPORT friend Boolean operator==(const CharEnumeratorConst& lhs, const CharEnumerator& rhs) noexcept;
-		CPPNET2_EXPORT friend Boolean operator!=(const CharEnumerator& lhs, const CharEnumeratorConst& rhs) noexcept;
-		CPPNET2_EXPORT friend Boolean operator!=(const CharEnumeratorConst& lhs, const CharEnumerator& rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator==(const CharEnumerator& lhs, const ReadOnlyCharEnumerator& rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator==(const ReadOnlyCharEnumerator& lhs, const CharEnumerator& rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator!=(const CharEnumerator& lhs, const ReadOnlyCharEnumerator& rhs) noexcept;
+		CPPNET2_EXPORT friend Boolean operator!=(const ReadOnlyCharEnumerator& lhs, const CharEnumerator& rhs) noexcept;
 
 	public:
 		CharEnumerator(const CharEnumerator& enumerator) noexcept;
@@ -130,7 +133,7 @@ namespace CppNet2::System
 	class CPPNET2_EXPORT String final : public Object, public Details::System::StringBase1, public Details::System::StringBase2,
 		public ICloneable, public IComparable<>, public IComparable<String>, public IEquatable<String>
 	{
-		friend class CharEnumeratorConst;
+		friend class ReadOnlyCharEnumerator;
 		friend class CharEnumerator;
 
 		CPPNET2_EXPORT friend std::ostream& operator<<(std::ostream& stream, const String& string);
@@ -186,9 +189,9 @@ namespace CppNet2::System
 		using Details::System::StringBase2::GetEnumerator;
 
 	protected:
-		virtual std::unique_ptr<CppNet2::System::Collections::Generic::IEnumeratorConst<CppNet2::System::Char>> GetEnumeratorBase1() const override;
+		virtual std::unique_ptr<CppNet2::System::Collections::Generic::IReadOnlyEnumerator<CppNet2::System::Char>> GetEnumeratorBase1() const override;
 		virtual std::unique_ptr<CppNet2::System::Collections::Generic::IEnumerator<CppNet2::System::Char>> GetEnumeratorBase1() override;
-		virtual CharEnumeratorConst GetEnumeratorBase2() const override;
+		virtual ReadOnlyCharEnumerator GetEnumeratorBase2() const override;
 		virtual CharEnumerator GetEnumeratorBase2() override;
 
 	public:

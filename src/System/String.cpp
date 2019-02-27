@@ -20,7 +20,7 @@
 
 namespace CppNet2::Details::System
 {
-	std::unique_ptr<CppNet2::System::Collections::Generic::IEnumeratorConst<CppNet2::System::Char>> StringBase1::GetEnumerator() const
+	std::unique_ptr<CppNet2::System::Collections::Generic::IReadOnlyEnumerator<CppNet2::System::Char>> StringBase1::GetEnumerator() const
 	{
 		return GetEnumeratorBase1();
 	}
@@ -32,7 +32,7 @@ namespace CppNet2::Details::System
 
 namespace CppNet2::Details::System
 {
-	CppNet2::System::CharEnumeratorConst StringBase2::GetEnumerator() const
+	CppNet2::System::ReadOnlyCharEnumerator StringBase2::GetEnumerator() const
 	{
 		return GetEnumeratorBase2();
 	}
@@ -44,18 +44,18 @@ namespace CppNet2::Details::System
 
 namespace CppNet2::System
 {
-	CharEnumeratorConst::CharEnumeratorConst(const CharEnumerator& enumerator) noexcept
+	ReadOnlyCharEnumerator::ReadOnlyCharEnumerator(const CharEnumerator& enumerator) noexcept
 		: m_String(enumerator.m_String), m_Index(enumerator.m_Index)
 	{}
-	CharEnumeratorConst::CharEnumeratorConst(const CharEnumeratorConst& enumerator) noexcept
+	ReadOnlyCharEnumerator::ReadOnlyCharEnumerator(const ReadOnlyCharEnumerator& enumerator) noexcept
 		: m_String(enumerator.m_String), m_Index(enumerator.m_Index)
 	{}
 
-	CharEnumeratorConst::CharEnumeratorConst(const String* string) noexcept
+	ReadOnlyCharEnumerator::ReadOnlyCharEnumerator(const String* string) noexcept
 		: m_String(string)
 	{}
 
-	CharEnumeratorConst& CharEnumeratorConst::operator=(const CharEnumeratorConst& enumerator) noexcept
+	ReadOnlyCharEnumerator& ReadOnlyCharEnumerator::operator=(const ReadOnlyCharEnumerator& enumerator) noexcept
 	{
 		m_String = enumerator.m_String;
 		m_Index = enumerator.m_Index;
@@ -63,51 +63,51 @@ namespace CppNet2::System
 		return *this;
 	}
 
-	Boolean operator==(const CharEnumerator& lhs, const CharEnumeratorConst& rhs) noexcept
+	Boolean operator==(const CharEnumerator& lhs, const ReadOnlyCharEnumerator& rhs) noexcept
 	{
 		return lhs.m_String == rhs.m_String && lhs.m_Index == rhs.m_Index;
 	}
-	Boolean operator==(const CharEnumeratorConst& lhs, const CharEnumerator& rhs) noexcept
+	Boolean operator==(const ReadOnlyCharEnumerator& lhs, const CharEnumerator& rhs) noexcept
 	{
 		return lhs.m_String == rhs.m_String && lhs.m_Index == rhs.m_Index;
 	}
-	Boolean operator==(const CharEnumeratorConst& lhs, const CharEnumeratorConst& rhs) noexcept
+	Boolean operator==(const ReadOnlyCharEnumerator& lhs, const ReadOnlyCharEnumerator& rhs) noexcept
 	{
 		return lhs.m_String == rhs.m_String && lhs.m_Index == rhs.m_Index;
 	}
-	Boolean operator!=(const CharEnumerator& lhs, const CharEnumeratorConst& rhs) noexcept
+	Boolean operator!=(const CharEnumerator& lhs, const ReadOnlyCharEnumerator& rhs) noexcept
 	{
 		return lhs.m_String != rhs.m_String || lhs.m_Index != rhs.m_Index;
 	}
-	Boolean operator!=(const CharEnumeratorConst& lhs, const CharEnumerator& rhs) noexcept
+	Boolean operator!=(const ReadOnlyCharEnumerator& lhs, const CharEnumerator& rhs) noexcept
 	{
 		return lhs.m_String != rhs.m_String || lhs.m_Index != rhs.m_Index;
 	}
-	Boolean operator!=(const CharEnumeratorConst& lhs, const CharEnumeratorConst& rhs) noexcept
+	Boolean operator!=(const ReadOnlyCharEnumerator& lhs, const ReadOnlyCharEnumerator& rhs) noexcept
 	{
 		return lhs.m_String != rhs.m_String || lhs.m_Index != rhs.m_Index;
 	}
 
-	std::unique_ptr<Object> CharEnumeratorConst::Clone() const
+	std::unique_ptr<Object> ReadOnlyCharEnumerator::Clone() const
 	{
-		return std::unique_ptr<Object>(new CharEnumeratorConst(*this));
+		return std::unique_ptr<Object>(new ReadOnlyCharEnumerator(*this));
 	}
-	void CharEnumeratorConst::Dispose()
+	void ReadOnlyCharEnumerator::Dispose()
 	{
 		m_String = nullptr;
 		m_Index = -1;
 	}
-	Boolean CharEnumeratorConst::MoveNext()
+	Boolean ReadOnlyCharEnumerator::MoveNext()
 	{
 		if (m_String && m_Index < m_String->Length() - 1) return ++m_Index, true;
 		else return false;
 	}
-	void CharEnumeratorConst::Reset()
+	void ReadOnlyCharEnumerator::Reset()
 	{
 		m_Index = -1;
 	}
 
-	const Char& CharEnumeratorConst::Current() const
+	const Char& ReadOnlyCharEnumerator::Current() const
 	{
 		return (*m_String)[m_Index];
 	}
@@ -333,15 +333,15 @@ namespace CppNet2::System
 		else return false;
 	}
 
-	std::unique_ptr<CppNet2::System::Collections::Generic::IEnumeratorConst<CppNet2::System::Char>> String::GetEnumeratorBase1() const
+	std::unique_ptr<CppNet2::System::Collections::Generic::IReadOnlyEnumerator<CppNet2::System::Char>> String::GetEnumeratorBase1() const
 	{
-		return std::unique_ptr<Collections::Generic::IEnumeratorConst<Char>>(new CharEnumeratorConst(this));
+		return std::unique_ptr<Collections::Generic::IReadOnlyEnumerator<Char>>(new ReadOnlyCharEnumerator(this));
 	}
 	std::unique_ptr<CppNet2::System::Collections::Generic::IEnumerator<CppNet2::System::Char>> String::GetEnumeratorBase1()
 	{
 		return std::unique_ptr<Collections::Generic::IEnumerator<Char>>(new CharEnumerator(this));
 	}
-	CharEnumeratorConst System::String::GetEnumeratorBase2() const
+	ReadOnlyCharEnumerator System::String::GetEnumeratorBase2() const
 	{
 		return this;
 	}
